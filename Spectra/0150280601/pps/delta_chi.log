@@ -1,0 +1,141 @@
+#XSPEC version: 12.10.0c
+#Build Date/Time: Fri Apr 20 13:14:53 2018
+#
+!XSPEC12>data P0150280601PNS001SRSPEC0001.FTZ
+#
+#***XSPEC Error:  cannot open file named: epn_ff20_sdY6.rmf
+#Error: cannot read response file epn_ff20_sdY6.rmf
+#
+#
+#*** Response file has format inconsistent with data:  response file epn_ff20_sdY6.rmf read skipped
+#
+#1 spectrum  in use
+# 
+#Spectral Data File: P0150280601PNS001SRSPEC0001.FTZ  Spectrum 1
+#Net count rate (cts/s) for Spectrum:1  8.664e-01 +/- 1.221e-02 (98.4 % total)
+# Assigned to Data Group 1 and Plot Group 1
+#  Noticed Channels:  1-2401
+#  Telescope: XMM Instrument: EPN  Channel Type: PI
+#  Exposure Time: 5916 sec
+# Using fit statistic: chi
+# Using test statistic: chi
+# Using Background File                P0150280601PNS001BGSPEC0001.FTZ
+#  Background Exposure Time: 5915 sec
+# No response loaded.
+#
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12>back P0150280601PNS001BGSPEC0001.FTZ
+#
+!XSPEC12>backgrnd P0150280601PNS001BGSPEC0001.FTZ
+#Net count rate (cts/s) for Spectrum:1  8.664e-01 +/- 1.221e-02 (98.4 % total)
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12>resp epn_e1_ff20_sY9_v16.0.rmf
+#
+!XSPEC12>response epn_e1_ff20_sY9_v16.0.rmf
+#Response successfully loaded.
+#
+!XSPEC12>arf P0150280601PNS001SRCARF0001.FTZ
+#Arf successfully loaded.
+#
+!XSPEC12>ignore **-2.0 10.0-**
+#   208 channels (1-208) ignored in spectrum #     1
+#  2097 channels (305-2401) ignored in spectrum #     1
+#
+#
+!XSPEC12>ignore bad
+#
+#ignore:  2199 channels ignored from  source number 1
+#
+!XSPEC12>model tbabs*cutoffpl  ;  1.0,0.1  ;  2, 0.01  ;  15, 0.01  ;  1.E-4 1E-5
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    1.00000      +/-  0.0          
+#   2    2   cutoffpl   PhoIndex            2.00000      +/-  0.0          
+#   3    2   cutoffpl   HighECut   keV      15.0000      +/-  0.0          
+#   4    2   cutoffpl   norm                1.00000E-04  +/-  0.0          
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =        1006.57 using 58 PHA bins.
+#
+#Test statistic : Chi-Squared =        1006.57 using 58 PHA bins.
+# Reduced chi-squared =        18.6402 for     54 degrees of freedom 
+# Null hypothesis probability =  1.231607e-175
+# Current data and model not fit yet.
+#
+!XSPEC12>fit
+#                                   Parameters
+#Chi-Squared  |beta|/N    Lvl          1:nH    2:PhoIndex    3:HighECut        4:norm
+#51.5243      7.32159      -1      0.356876       2.03200       15.5191    0.00136693
+#49.9087      1042.11      -1      0.162151       2.04274       17.8279    0.00129366
+#48.9241      172.57       -1     0.0476339       2.04657       21.2882    0.00123223
+#48.3701      645.784      -1    0.00326919       2.04806       25.9875    0.00117994
+#48.1402      2576          0    0.00152070       2.04606       27.1282    0.00117886
+#48.0689      909.401       0   0.000726038       2.04565       27.9602    0.00117595
+#48.0262      461.721       0   0.000319769       2.04575       28.6910    0.00117261
+#47.9932      404.324       0   0.000104760       2.04603       29.3934    0.00116927
+#47.9659      468.258       0   4.75366e-05       2.04638       30.0920    0.00116605
+#47.9424      569.124       0   1.71374e-05       2.04677       30.7951    0.00116300
+#47.922       675.2         0   1.07090e-06       2.04718       31.5044    0.00116011
+#47.9043      779.645       0   1.48062e-08       2.04762       32.2205    0.00115739
+#47.8888      880.562       0   6.16759e-09       2.04808       32.9444    0.00115482
+#47.8754      976.694       0   1.66347e-09       2.04857       33.6752    0.00115240
+#47.8637      1068.56       0   4.93512e-10       2.04907       34.4141    0.00115012
+#47.8536      1155.95       0   1.90573e-10       2.04960       35.1605    0.00114797
+#47.8449      1239.3        0   3.41220e-11       2.05014       35.9145    0.00114594
+#==================================================
+# Variances and Principal Axes
+#                 1        2        3        4  
+# 1.2071E-09| -0.0002  -0.0014   0.0000   1.0000  
+# 6.6886E-03|  0.3120  -0.9501   0.0029  -0.0012  
+# 4.3785E-01| -0.9501  -0.3120   0.0054  -0.0006  
+# 1.1999E+05|  0.0042   0.0045   1.0000   0.0000  
+#--------------------------------------------------
+#
+#================================================
+#  Covariance Matrix
+#        1           2           3           4   
+#   2.511e+00   2.370e+00   5.037e+02   2.087e-03
+#   2.370e+00   2.427e+00   5.342e+02   2.037e-03
+#   5.037e+02   5.342e+02   1.200e+05   4.369e-01
+#   2.087e-03   2.037e-03   4.369e-01   1.766e-06
+#------------------------------------------------
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    3.41220E-11  +/-  1.58453      
+#   2    2   cutoffpl   PhoIndex            2.05014      +/-  1.55781      
+#   3    2   cutoffpl   HighECut   keV      35.9145      +/-  346.390      
+#   4    2   cutoffpl   norm                1.14594E-03  +/-  1.32909E-03  
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =          47.84 using 58 PHA bins.
+#
+#Test statistic : Chi-Squared =          47.84 using 58 PHA bins.
+# Reduced chi-squared =         0.8860 for     54 degrees of freedom 
+# Null hypothesis probability =   7.093794e-01
+#
+!XSPEC12>save all fit_tbabscutoffpl.xcm
+#
+!XSPEC12>setplot energy
+#
+!XSPEC12>setplot rebin 3 10
+#
+!XSPEC12>setplot command wdata wdata.dat
+#
+!XSPEC12>plot delchi
+#
+!XSPEC12>mv wdata.dat fit_tbabscutoffpl_delc.dat
+#
+!XSPEC12>log none
+#

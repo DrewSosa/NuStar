@@ -1,0 +1,18 @@
+statistic chi
+data 1:1 P0672130101PNS002SRSPEC0002.FTZ
+response  1:1 epn_e2_ff20_sY9_v16.0.rmf
+arf 1:1 P0672130101PNS002SRCARF0002.FTZ
+backgrnd 1 P0672130101PNS002BGSPEC0002.FTZ
+ignore 1:1-391,609,619-2368
+
+method leven 10 0.01
+abund angr
+xsect vern
+cosmo 70 0 0.73
+xset delta 0.01
+systematic 0
+model  TBabs*cutoffpl
+    4.41858e-05        0.1          0          0     100000      1e+06
+        1.88255       0.01         -3         -2          9         10
+        35.1989       0.01       0.01          1        500        500
+    0.000226422      1e-05          0          0      1e+20      1e+24

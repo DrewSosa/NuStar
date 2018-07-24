@@ -1,0 +1,146 @@
+#XSPEC version: 12.10.0c
+#Build Date/Time: Fri Apr 20 13:14:53 2018
+#
+!XSPEC12>data P0653380501PNS003SRSPEC0002.FTZ
+#
+#***XSPEC Error:  cannot open file named: epn_ff20_sdY9.rmf
+#Error: cannot read response file epn_ff20_sdY9.rmf
+#
+#
+#*** Response file has format inconsistent with data:  response file epn_ff20_sdY9.rmf read skipped
+#
+#1 spectrum  in use
+# 
+#Spectral Data File: P0653380501PNS003SRSPEC0002.FTZ  Spectrum 1
+#Net count rate (cts/s) for Spectrum:1  2.224e-01 +/- 1.741e-03 (90.8 % total)
+# Assigned to Data Group 1 and Plot Group 1
+#  Noticed Channels:  1-1913
+#  Telescope: XMM Instrument: EPN  Channel Type: PI
+#  Exposure Time: 8.112e+04 sec
+# Using fit statistic: chi
+# Using test statistic: chi
+# Using Background File                P0653380501PNS003BGSPEC0002.FTZ
+#  Background Exposure Time: 8.11e+04 sec
+# No response loaded.
+#
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12>back P0653380501PNS003BGSPEC0002.FTZ
+#
+!XSPEC12>backgrnd P0653380501PNS003BGSPEC0002.FTZ
+#Net count rate (cts/s) for Spectrum:1  2.224e-01 +/- 1.741e-03 (90.8 % total)
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12>resp epn_e2_ff20_sY9_v16.0.rmf
+#
+!XSPEC12>response epn_e2_ff20_sY9_v16.0.rmf
+#Response successfully loaded.
+#
+!XSPEC12>arf P0653380501PNS003SRCARF0002.FTZ
+#Arf successfully loaded.
+#
+!XSPEC12>ignore **-2.0 10.0-**
+#   120 channels (1-120) ignored in spectrum #     1
+#  1771 channels (143-1913) ignored in spectrum #     1
+#
+#
+!XSPEC12>ignore bad
+#
+#ignore:  1833 channels ignored from  source number 1
+#
+!XSPEC12>model tbabs*cutoffpl  ;  1.0,0.1  ;  2, 0.01  ;  15, 0.01  ;  1.E-4 1E-5
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    1.00000      +/-  0.0          
+#   2    2   cutoffpl   PhoIndex            2.00000      +/-  0.0          
+#   3    2   cutoffpl   HighECut   keV      15.0000      +/-  0.0          
+#   4    2   cutoffpl   norm                1.00000E-04  +/-  0.0          
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =        2389.24 using 21 PHA bins.
+#
+#Test statistic : Chi-Squared =        2389.24 using 21 PHA bins.
+# Reduced chi-squared =        140.544 for     17 degrees of freedom 
+# Null hypothesis probability =   0.000000e+00
+# Current data and model not fit yet.
+#
+!XSPEC12>fit
+#                                   Parameters
+#Chi-Squared  |beta|/N    Lvl          1:nH    2:PhoIndex    3:HighECut        4:norm
+#32.0619      0.375657     -1      0.143906       2.11828       5.72271   7.85863e-06
+#31.5106      55794.5       0      0.122787       2.17915       4.47433   7.78849e-06
+#31.4552      4006.35       0     0.0535025       2.18739       4.08990   8.00798e-06
+#31.4228      7953.1        0     0.0123081       2.18404       3.85979   8.24136e-06
+#31.3999      6962.31       0    0.00449079       2.17726       3.68807   8.45663e-06
+#31.3808      6421.58       0    0.00371096       2.16829       3.55100   8.66240e-06
+#31.3649      5373.38      -1      0.227887       2.06808       2.42958   1.04352e-05
+#31.1156      21842.9      -1      0.674529       1.87291       2.29089   1.21228e-05
+#31.0359      3238.18      -1      0.940045       1.77925       1.96801   1.39574e-05
+#30.9428      7318.78      -1       1.24477       1.66644       1.80166   1.58497e-05
+#30.8728      4055.48      -1       1.50915       1.57409       1.65569   1.78212e-05
+#30.8106      3502.04      -1       1.75699       1.48770       1.54242   1.98652e-05
+#30.7569      2716.92      -1       1.98547       1.40873       1.44932   2.19686e-05
+#30.7099      2192.81      -1       2.19716       1.33562       1.37178   2.41211e-05
+#30.6687      1784.13      -1       2.39364       1.26758       1.30611   2.63115e-05
+#30.6323      1468.38      -1       2.57638       1.20389       1.24975   2.85295e-05
+#30.6         1220.7       -1       2.74670       1.14398       1.20082   3.07655e-05
+#30.5713      1024.2       -1       2.90572       1.08737       1.15792   3.30106e-05
+#30.5456      866.606      -1       3.05446       1.03366       1.11996   3.52564e-05
+#30.4627      739.037      -2       3.83352      0.611060      0.872476   5.24284e-05
+#30.3848      2985.66      -1       4.02375      0.526711      0.874036   5.44247e-05
+#30.3781      167.76       -1       4.13872      0.486403      0.867192   5.59850e-05
+#==================================================
+# Variances and Principal Axes
+#                 1        2        3        4  
+# 3.5735E-10| -0.0000  -0.0001   0.0002   1.0000  
+# 1.8207E-01|  0.1129  -0.2418   0.9637  -0.0002  
+# 5.8003E+01| -0.8260   0.5163   0.2263  -0.0000  
+# 5.6406E+03|  0.5522   0.8216   0.1415   0.0000  
+#--------------------------------------------------
+#
+#================================================
+#  Covariance Matrix
+#        1           2           3           4   
+#   1.760e+03   2.534e+03   4.298e+02   7.445e-02
+#   2.534e+03   3.823e+03   6.623e+02   1.081e-01
+#   4.298e+02   6.623e+02   1.160e+02   1.835e-02
+#   7.445e-02   1.081e-01   1.835e-02   3.162e-06
+#------------------------------------------------
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    4.13872      +/-  41.9480      
+#   2    2   cutoffpl   PhoIndex            0.486403     +/-  61.8318      
+#   3    2   cutoffpl   HighECut   keV      0.867192     +/-  10.7714      
+#   4    2   cutoffpl   norm                5.59850E-05  +/-  1.77810E-03  
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =          30.38 using 21 PHA bins.
+#
+#Test statistic : Chi-Squared =          30.38 using 21 PHA bins.
+# Reduced chi-squared =          1.787 for     17 degrees of freedom 
+# Null hypothesis probability =   2.374364e-02
+#
+!XSPEC12>save all fit_tbabscutoffpl.xcm
+#
+!XSPEC12>setplot energy
+#
+!XSPEC12>setplot rebin 3 10
+#
+!XSPEC12>setplot command wdata wdata.dat
+#
+!XSPEC12>plot ldata
+#
+!XSPEC12>mv wdata.dat fit_tbabscutoffpl_ld.dat
+#
+!XSPEC12>log none
+#

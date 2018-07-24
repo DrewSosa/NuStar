@@ -1,0 +1,434 @@
+#XSPEC version: 12.10.0c
+#Build Date/Time: Fri Apr 20 13:14:53 2018
+#
+!XSPEC12>data P0106860101PNU002SRSPEC0001.FTZ
+#
+#***XSPEC Error:  cannot open file named: epn_ff20_sdY8.rmf
+#Error: cannot read response file epn_ff20_sdY8.rmf
+#
+#
+#*** Response file has format inconsistent with data:  response file epn_ff20_sdY8.rmf read skipped
+#
+#1 spectrum  in use
+# 
+#Spectral Data File: P0106860101PNU002SRSPEC0001.FTZ  Spectrum 1
+#Net count rate (cts/s) for Spectrum:1  7.970e-01 +/- 7.248e-03 (98.1 % total)
+# Assigned to Data Group 1 and Plot Group 1
+#  Noticed Channels:  1-2455
+#  Telescope: XMM Instrument: EPN  Channel Type: PI
+#  Exposure Time: 1.548e+04 sec
+# Using fit statistic: chi
+# Using test statistic: chi
+# Using Background File                P0106860101PNU002BGSPEC0001.FTZ
+#  Background Exposure Time: 1.548e+04 sec
+# No response loaded.
+#
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12>back P0106860101PNU002BGSPEC0001.FTZ
+#
+!XSPEC12>backgrnd P0106860101PNU002BGSPEC0001.FTZ
+#Net count rate (cts/s) for Spectrum:1  7.970e-01 +/- 7.248e-03 (98.1 % total)
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12>resp epn_e1_ff20_sY9_v16.0.rmf
+#
+!XSPEC12>response epn_e1_ff20_sY9_v16.0.rmf
+#Response successfully loaded.
+#
+!XSPEC12>arf P0106860101PNU002SRCARF0001.FTZ
+#Arf successfully loaded.
+#
+!XSPEC12>ignore **-2.0 10.0-**
+#   345 channels (1-345) ignored in spectrum #     1
+#  1954 channels (502-2455) ignored in spectrum #     1
+#
+#
+!XSPEC12>ignore bad
+#
+#ignore:  2018 channels ignored from  source number 1
+#
+!XSPEC12>model tbabs*cutoffpl  ;  1.0,0.1  ;  2, 0.01  ;  15, 0.01  ;  1.E-4 1E-5
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    1.00000      +/-  0.0          
+#   2    2   cutoffpl   PhoIndex            2.00000      +/-  0.0          
+#   3    2   cutoffpl   HighECut   keV      15.0000      +/-  0.0          
+#   4    2   cutoffpl   norm                1.00000E-04  +/-  0.0          
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =        2639.49 using 155 PHA bins.
+#
+#Test statistic : Chi-Squared =        2639.49 using 155 PHA bins.
+# Reduced chi-squared =        17.4801 for    151 degrees of freedom 
+# Null hypothesis probability =   0.000000e+00
+# Current data and model not fit yet.
+#
+!XSPEC12>fit
+#                                   Parameters
+#Chi-Squared  |beta|/N    Lvl          1:nH    2:PhoIndex    3:HighECut        4:norm
+#180.579      31.4264      -1       1.32351       1.97452       20.8589   0.000925252
+#174.122      16990.7      -1       1.32576       1.96521       27.6625   0.000884886
+#171.374      9456.94      -1       1.26090       1.96269       36.0127   0.000850221
+#169.627      5991.94      -1       1.19037       1.96179       47.3530   0.000820645
+#168.379      4941.4       -1       1.12596       1.96100       63.8871   0.000795672
+#167.468      4672.3       -1       1.06954       1.95992       89.6616   0.000774614
+#166.807      4699.66      -1       1.02064       1.95854       133.745   0.000756781
+#166.335      5015.96      -1      0.978443       1.95682       219.714   0.000741650
+#166.028      5626.83      -1      0.941979       1.95482       429.044   0.000728708
+#165.85       6857.4        0      0.936573       1.95303       472.774   0.000728663
+#165.798      2886.07       0      0.934266       1.95191       493.362   0.000727990
+#165.773      1658.68       0      0.932585       1.95101       498.391   0.000727132
+#165.753      1363.2        0      0.930877       1.95018       499.318   0.000726236
+#165.734      1274.72       0      0.929056       1.94938       499.847   0.000725334
+#165.716      1221.94       0      0.927143       1.94860       499.991   0.000724432
+#165.699      1188.62       0      0.925162       1.94784       499.996   0.000723532
+#165.681      1163.13       0      0.923134       1.94708       499.998   0.000722635
+#165.664      1141.21       0      0.921077       1.94633       499.999   0.000721743
+#165.647      1122.47       0      0.919002       1.94560       500.000   0.000720856
+#165.631      1106.28       0      0.916916       1.94486       500.000   0.000719973
+#165.614      1092.07       0      0.914826       1.94414       500.000   0.000719095
+#165.598      1079.35       0      0.912735       1.94342       500.000   0.000718222
+#165.582      1067.75       0      0.910647       1.94270       500.000   0.000717355
+#165.566      1056.98       0      0.908565       1.94199       500.000   0.000716493
+#165.55       1046.83       0      0.906489       1.94128       500.000   0.000715636
+#165.535      1037.15       0      0.904420       1.94058       500.000   0.000714785
+#165.52       1027.82       0      0.902361       1.93988       500.000   0.000713940
+#165.505      1018.75       0      0.900311       1.93919       500.000   0.000713100
+#165.49       1009.88       0      0.898270       1.93850       500.000   0.000712265
+#165.475      1001.16       0      0.896240       1.93781       500.000   0.000711436
+#165.46       992.559       0      0.894219       1.93713       500.000   0.000710612
+#165.446      984.053       0      0.892209       1.93645       500.000   0.000709793
+#165.431      975.622       0      0.890210       1.93578       500.000   0.000708980
+#165.417      967.251       0      0.888221       1.93511       500.000   0.000708172
+#165.272      1278.58      -1      0.870690       1.92772       500.000   0.000701001
+#164.612      1364.21      -2      0.747639       1.88658       500.000   0.000651233
+#164.256      3123.71      -3      0.559053       1.82456       500.000   0.000582732
+#164.146      10077.2      -4      0.530730       1.81570       500.000   0.000577066
+#164.146      52.5166      -5      0.530911       1.81583       500.000   0.000577190
+#164.144      0.00760341   -2      0.535589       1.79664       158.855   0.000575872
+#==================================================
+# Variances and Principal Axes
+#                 1        2        3        4  
+# 1.0904E-10| -0.0001  -0.0007   0.0000   1.0000  
+# 1.9050E-03|  0.2752  -0.9614   0.0000  -0.0007  
+# 1.2529E-01| -0.9614  -0.2752   0.0000  -0.0003  
+# 3.9983E+09|  0.0000   0.0000   1.0000   0.0000  
+#--------------------------------------------------
+#
+#================================================
+#  Covariance Matrix
+#        1           2           3           4   
+#   7.065e-01   6.059e-01   4.859e+04   2.870e-04
+#   6.059e-01   5.678e-01   4.717e+04   2.566e-04
+#   4.859e+04   4.717e+04   3.998e+09   2.081e+01
+#   2.870e-04   2.566e-04   2.081e+01   1.196e-07
+#------------------------------------------------
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    0.535589     +/-  0.840528     
+#   2    2   cutoffpl   PhoIndex            1.79664      +/-  0.753505     
+#   3    2   cutoffpl   HighECut   keV      158.855      +/-  6.32323E+04  
+#   4    2   cutoffpl   norm                5.75872E-04  +/-  3.45779E-04  
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =         164.14 using 155 PHA bins.
+#
+#Test statistic : Chi-Squared =         164.14 using 155 PHA bins.
+# Reduced chi-squared =         1.0870 for    151 degrees of freedom 
+# Null hypothesis probability =   2.195991e-01
+#
+!XSPEC12>save all fit_tbabscutoffpl.xcm
+#
+!XSPEC12>setplot energy
+#
+!XSPEC12>setplot rebin 3 10
+#
+!XSPEC12>addc 3 zgauss ; 1 0.01 0.5 0.5 8.0 8.0 ; 0.01,-1 ; 0.002,-1 ; -1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10
+#
+!XSPEC12>addcomp 3 zgauss ; 1 0.01 0.5 0.5 8.0 8.0 ; 0.01,-1 ; 0.002,-1 ; -1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10
+#
+#Fit statistic : Chi-Squared =         164.14 using 155 PHA bins.
+#
+#Test statistic : Chi-Squared =         164.14 using 155 PHA bins.
+# Reduced chi-squared =         1.1016 for    149 degrees of freedom 
+# Null hypothesis probability =   1.874062e-01
+# Current data and model not fit yet.
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> + zgauss<3> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    0.535589     +/-  0.840528     
+#   2    2   cutoffpl   PhoIndex            1.79664      +/-  0.753505     
+#   3    2   cutoffpl   HighECut   keV      158.855      +/-  6.32323E+04  
+#   4    2   cutoffpl   norm                5.75872E-04  +/-  3.45779E-04  
+#   5    3   zgauss     LineE      keV      1.00000      +/-  0.0          
+#   6    3   zgauss     Sigma      keV      1.00000E-02  frozen
+#   7    3   zgauss     Redshift            2.00000E-03  frozen
+#   8    3   zgauss     norm                -1.00000E-06 +/-  0.0          
+#
+#________________________________________________________________________
+#
+!XSPEC12>fit
+#                                   Parameters
+#Chi-Squared  |beta|/N    Lvl          1:nH    2:PhoIndex    3:HighECut        4:norm       5:LineE        8:norm
+#***Warning: Zero alpha-matrix diagonal element for parameter 5
+#***Warning: Zero alpha-matrix diagonal element for parameter 8
+# Parameter 5 is pegged at 1 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 8 is pegged at -9.95243e-07 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#164.054      0.350409     -1      0.528780       1.79514       137.197   0.000573353       1.00000  -9.95243e-07
+#164.045      756.489      -1      0.528909       1.79309       126.657   0.000573434       1.00000  -9.95243e-07
+#***Warning: Zero alpha-matrix diagonal element for parameter 5
+#***Warning: Zero alpha-matrix diagonal element for parameter 8
+# Parameter 5 is pegged at 1 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 8 is pegged at -9.95243e-07 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#164.037      262.631      -1      0.529552       1.79111       118.358   0.000573322       1.00000  -9.95243e-07
+#==================================================
+# Variances and Principal Axes
+#                 1        2        3        4  
+# 1.0766E-10| -0.0001  -0.0007   0.0000   1.0000  
+# 1.9144E-03|  0.2756  -0.9613   0.0002  -0.0007  
+# 1.2582E-01| -0.9613  -0.2756   0.0005  -0.0003  
+# 4.2341E+06|  0.0004   0.0004   1.0000   0.0000  
+#--------------------------------------------------
+#
+#================================================
+#  Covariance Matrix
+#        1           2           3           4   
+#   7.098e-01   6.094e-01   1.585e+03   2.865e-04
+#   6.094e-01   5.717e-01   1.540e+03   2.565e-04
+#   1.585e+03   1.540e+03   4.234e+06   6.744e-01
+#   2.865e-04   2.565e-04   6.744e-01   1.186e-07
+#------------------------------------------------
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> + zgauss<3> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    0.529552     +/-  0.842475     
+#   2    2   cutoffpl   PhoIndex            1.79111      +/-  0.756085     
+#   3    2   cutoffpl   HighECut   keV      118.358      +/-  2057.70      
+#   4    2   cutoffpl   norm                5.73322E-04  +/-  3.44400E-04  
+#   5    3   zgauss     LineE      keV      1.00000      +/-  -1.00000     
+#   6    3   zgauss     Sigma      keV      1.00000E-02  frozen
+#   7    3   zgauss     Redshift            2.00000E-03  frozen
+#   8    3   zgauss     norm                -9.95243E-07 +/-  -1.00000     
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =         164.04 using 155 PHA bins.
+#
+#Test statistic : Chi-Squared =         164.04 using 155 PHA bins.
+# Reduced chi-squared =         1.1009 for    149 degrees of freedom 
+# Null hypothesis probability =   1.889673e-01
+#
+!XSPEC12>steppar 5 2 10. 30
+#
+#     Chi-Squared    Delta            LineE
+#                 Chi-Squared             5
+#
+#          164.19     0.14974    0           2
+#          162.85     -1.1838    1      2.2667
+#          162.72     -1.3199    2      2.5333
+#          162.99     -1.0479    3         2.8
+#          162.43     -1.6104    4      3.0667
+#          162.86     -1.1733    5      3.3333
+#           162.5     -1.5362    6         3.6
+#          162.19     -1.8426    7      3.8667
+#          162.19     -1.8485    8      4.1333
+#          163.06    -0.97539    9         4.4
+#          162.89     -1.1468   10      4.6667
+#          162.88     -1.1524   11      4.9333
+#          162.88     -1.1572   12         5.2
+#          162.04     -2.0016   13      5.4667
+#          162.59     -1.4468   14      5.7333
+#          162.88     -1.1613   15           6
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.85     -1.1835   16      6.2667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.85     -1.1839   17      6.5333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.67     -1.3691   18         6.8
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          156.89     -7.1476   19      7.0667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.78     -1.2607   20      7.3333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#           162.9     -1.1406   21         7.6
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81     -1.2223   22      7.8667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81      -1.226   23      8.1333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81      -1.226   24         8.4
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81      -1.226   25      8.6667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81      -1.226   26      8.9333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81      -1.226   27         9.2
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81      -1.226   28      9.4667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81      -1.226   29      9.7333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          162.81      -1.226   30          10
+#
+#A new best fit was found during steppar.
+#Parameters have been updated to the new best fit values.
+#
+#                                   Parameters
+#Chi-Squared  |beta|/N    Lvl          1:nH    2:PhoIndex    3:HighECut        4:norm       5:LineE        8:norm
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#156.506      2.18306      -3   1.89612e-17       1.30668       12.2078   0.000382342       7.09849  -1.48068e-06
+#156.506      28560.8       0   1.89612e-17       1.30665       12.2097   0.000382345       7.09664  -1.50637e-06
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+# Parameter 1 is pegged at 1.89612e-17 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#156.506      15744.3       0   1.89612e-17       1.30665       12.2099   0.000382345       7.09657  -1.50879e-06
+#============================================================
+# Variances and Principal Axes
+#                 2        3        4        5        8  
+# 3.3502E-13| -0.0000   0.0000   0.0123  -0.0000   0.9999  
+# 4.8203E-11|  0.0005  -0.0000  -0.9999  -0.0000   0.0123  
+# 2.1382E-03|  0.9990  -0.0275   0.0005  -0.0363   0.0000  
+# 7.2981E-03| -0.0363   0.0009  -0.0000  -0.9993  -0.0000  
+# 6.0517E+01|  0.0276   0.9996   0.0000  -0.0001  -0.0000  
+#------------------------------------------------------------
+#
+#============================================================
+#  Covariance Matrix
+#        1           2           3           4           5   
+#   4.808e-02   1.667e+00   6.847e-06  -3.336e-05  -1.395e-08
+#   1.667e+00   6.047e+01   2.105e-04  -8.002e-03  -7.668e-07
+#   6.847e-06   2.105e-04   1.290e-09   4.477e-08   2.063e-13
+#  -3.336e-05  -8.002e-03   4.477e-08   7.292e-03   1.433e-08
+#  -1.395e-08  -7.668e-07   2.063e-13   1.433e-08   4.014e-13
+#------------------------------------------------------------
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> + zgauss<3> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    1.89612E-17  +/-  -1.00000     
+#   2    2   cutoffpl   PhoIndex            1.30665      +/-  0.219271     
+#   3    2   cutoffpl   HighECut   keV      12.2099      +/-  7.77604      
+#   4    2   cutoffpl   norm                3.82345E-04  +/-  3.59128E-05  
+#   5    3   zgauss     LineE      keV      7.09657      +/-  8.53953E-02  
+#   6    3   zgauss     Sigma      keV      1.00000E-02  frozen
+#   7    3   zgauss     Redshift            2.00000E-03  frozen
+#   8    3   zgauss     norm                -1.50879E-06 +/-  6.33578E-07  
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =         156.51 using 155 PHA bins.
+#
+#Test statistic : Chi-Squared =         156.51 using 155 PHA bins.
+# Reduced chi-squared =         1.0504 for    149 degrees of freedom 
+# Null hypothesis probability =   3.205447e-01
+#
+!XSPEC12>plot contour
+#
+!XSPEC12>setplot command wdata wdata.dat
+#
+!XSPEC12>plot contour
+#
+!XSPEC12>mv wdata.dat fit_tbabscutoffpl+zgauss_con_e_0.01.dat
+#
+!XSPEC12>log none
+#

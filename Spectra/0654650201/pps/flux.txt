@@ -1,0 +1,26 @@
+query yes
+statistic chi
+cpd /null
+data none
+model none
+log flux.log
+data P0654650201PNU002SRSPEC0001.FTZ
+back P0654650201PNU002BGSPEC0001.FTZ
+resp epn_e2_ff20_sY9_v16.0.rmf
+arf P0654650201PNU002SRCARF0001.FTZ
+ignore **-2.0 10.0-**
+ignore bad
+model tbabs*cutoffpl
+1.0,0.1
+2, 0.01
+15, 0.01
+1.E-4 1E-5
+fit
+save all fit_tbabscutoffpl.xcm
+setplot energy
+setplot rebin 3 10
+setplot command wdata wdata.dat
+plot ldata
+mv wdata.dat fit_tbabscutoffpl_ld.dat
+log none
+exit

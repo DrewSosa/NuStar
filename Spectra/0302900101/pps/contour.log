@@ -1,0 +1,713 @@
+#XSPEC version: 12.10.0c
+#Build Date/Time: Fri Apr 20 13:14:53 2018
+#
+!XSPEC12>data P0302900101PNS003SRSPEC0002.FTZ
+#
+#***XSPEC Error:  cannot open file named: epn_ff20_sdY9.rmf
+#Error: cannot read response file epn_ff20_sdY9.rmf
+#
+#
+#*** Response file has format inconsistent with data:  response file epn_ff20_sdY9.rmf read skipped
+#
+#1 spectrum  in use
+# 
+#Spectral Data File: P0302900101PNS003SRSPEC0002.FTZ  Spectrum 1
+#Net count rate (cts/s) for Spectrum:1  2.138e+00 +/- 4.976e-03 (99.0 % total)
+# Assigned to Data Group 1 and Plot Group 1
+#  Noticed Channels:  1-2051
+#  Telescope: XMM Instrument: EPN  Channel Type: PI
+#  Exposure Time: 8.732e+04 sec
+# Using fit statistic: chi
+# Using test statistic: chi
+# Using Background File                P0302900101PNS003BGSPEC0002.FTZ
+#  Background Exposure Time: 8.73e+04 sec
+# No response loaded.
+#
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12>back P0302900101PNS003BGSPEC0002.FTZ
+#
+!XSPEC12>backgrnd P0302900101PNS003BGSPEC0002.FTZ
+#Net count rate (cts/s) for Spectrum:1  2.138e+00 +/- 4.976e-03 (99.0 % total)
+#***Warning!  One or more spectra are missing responses,
+#               and are not suitable for fit.
+#
+!XSPEC12>resp epn_e1_ff20_sY9_v16.0.rmf
+#
+!XSPEC12>response epn_e1_ff20_sY9_v16.0.rmf
+#Response successfully loaded.
+#
+!XSPEC12>arf P0302900101PNS003SRCARF0002.FTZ
+#Arf successfully loaded.
+#
+!XSPEC12>ignore **-2.0 10.0-**
+#   215 channels (1-215) ignored in spectrum #     1
+#  1817 channels (235-2051) ignored in spectrum #     1
+#
+#
+!XSPEC12>ignore bad
+#
+#ignore:  1880 channels ignored from  source number 1
+#
+!XSPEC12>model tbabs*cutoffpl  ;  1.0,0.1  ;  2, 0.01  ;  15, 0.01  ;  1.E-4 1E-5
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    1.00000      +/-  0.0          
+#   2    2   cutoffpl   PhoIndex            2.00000      +/-  0.0          
+#   3    2   cutoffpl   HighECut   keV      15.0000      +/-  0.0          
+#   4    2   cutoffpl   norm                1.00000E-04  +/-  0.0          
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =       11493.98 using 18 PHA bins.
+#
+#Test statistic : Chi-Squared =       11493.98 using 18 PHA bins.
+# Reduced chi-squared =       820.9983 for     14 degrees of freedom 
+# Null hypothesis probability =   0.000000e+00
+# Current data and model not fit yet.
+#
+!XSPEC12>fit
+#                                   Parameters
+#Chi-Squared  |beta|/N    Lvl          1:nH    2:PhoIndex    3:HighECut        4:norm
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#49.1041      341252       -3       1.00000       2.00000       15.0000       0.00000
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#49.1041      341252       -3       1.00000       2.00000       15.0000       0.00000
+#====================
+# Variances and Principal Axes
+#                 4  
+# 3.5372E-12| -1.0000  
+#--------------------
+#
+#============
+#  Covariance Matrix
+#        1   
+#   3.537e-12
+#------------
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    1.00000      +/-  -1.00000     
+#   2    2   cutoffpl   PhoIndex            2.00000      +/-  -1.00000     
+#   3    2   cutoffpl   HighECut   keV      15.0000      +/-  -1.00000     
+#   4    2   cutoffpl   norm                0.0          +/-  1.88075E-06  
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =          49.10 using 18 PHA bins.
+#
+#Test statistic : Chi-Squared =          49.10 using 18 PHA bins.
+# Reduced chi-squared =          3.507 for     14 degrees of freedom 
+# Null hypothesis probability =   8.618454e-06
+#
+!XSPEC12>save all fit_tbabscutoffpl.xcm
+#
+!XSPEC12>setplot energy
+#
+!XSPEC12>setplot rebin 3 10
+#
+!XSPEC12>addc 3 zgauss ; 1 0.01 0.5 0.5 8.0 8.0 ; 0.01,-1 ; 0.002,-1 ; -1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10
+#
+!XSPEC12>addcomp 3 zgauss ; 1 0.01 0.5 0.5 8.0 8.0 ; 0.01,-1 ; 0.002,-1 ; -1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10
+#
+#Fit statistic : Chi-Squared =          49.10 using 18 PHA bins.
+#
+#Test statistic : Chi-Squared =          49.10 using 18 PHA bins.
+# Reduced chi-squared =          4.092 for     12 degrees of freedom 
+# Null hypothesis probability =   2.005808e-06
+# Current data and model not fit yet.
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> + zgauss<3> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    1.00000      +/-  -1.00000     
+#   2    2   cutoffpl   PhoIndex            2.00000      +/-  -1.00000     
+#   3    2   cutoffpl   HighECut   keV      15.0000      +/-  -1.00000     
+#   4    2   cutoffpl   norm                0.0          +/-  1.88075E-06  
+#   5    3   zgauss     LineE      keV      1.00000      +/-  0.0          
+#   6    3   zgauss     Sigma      keV      1.00000E-02  frozen
+#   7    3   zgauss     Redshift            2.00000E-03  frozen
+#   8    3   zgauss     norm                -1.00000E-06 +/-  0.0          
+#
+#________________________________________________________________________
+#
+!XSPEC12>fit
+# renorm: no renormalization necessary
+#                                   Parameters
+#Chi-Squared  |beta|/N    Lvl          1:nH    2:PhoIndex    3:HighECut        4:norm       5:LineE        8:norm
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#***Warning: Zero alpha-matrix diagonal element for parameter 5
+#***Warning: Zero alpha-matrix diagonal element for parameter 8
+# Parameter 5 is pegged at 1 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 8 is pegged at -1e-06 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#49.1041      341252       -3       1.00000       2.00000       15.0000       0.00000       1.00000  -1.00000e-06
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#***Warning: Zero alpha-matrix diagonal element for parameter 5
+#***Warning: Zero alpha-matrix diagonal element for parameter 8
+# Parameter 5 is pegged at 1 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 8 is pegged at -1e-06 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#49.1041      341252       -3       1.00000       2.00000       15.0000       0.00000       1.00000  -1.00000e-06
+#====================
+# Variances and Principal Axes
+#                 4  
+# 3.5372E-12| -1.0000  
+#--------------------
+#
+#============
+#  Covariance Matrix
+#        1   
+#   3.537e-12
+#------------
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> + zgauss<3> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    1.00000      +/-  -1.00000     
+#   2    2   cutoffpl   PhoIndex            2.00000      +/-  -1.00000     
+#   3    2   cutoffpl   HighECut   keV      15.0000      +/-  -1.00000     
+#   4    2   cutoffpl   norm                0.0          +/-  1.88075E-06  
+#   5    3   zgauss     LineE      keV      1.00000      +/-  -1.00000     
+#   6    3   zgauss     Sigma      keV      1.00000E-02  frozen
+#   7    3   zgauss     Redshift            2.00000E-03  frozen
+#   8    3   zgauss     norm                -1.00000E-06 +/-  -1.00000     
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =          49.10 using 18 PHA bins.
+#
+#Test statistic : Chi-Squared =          49.10 using 18 PHA bins.
+# Reduced chi-squared =          4.092 for     12 degrees of freedom 
+# Null hypothesis probability =   2.005808e-06
+#
+!XSPEC12>steppar 5 2 10. 30
+# renorm: no renormalization necessary
+#
+#     Chi-Squared    Delta            LineE
+#                 Chi-Squared             5
+#
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.104   5.933e-05    0           2
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.106   0.0017901    1      2.2667
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          47.283      -1.821    2      2.5333
+#          45.785     -3.3191    3         2.8
+#          48.342    -0.76202    4      3.0667
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.108   0.0035569    5      3.3333
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.095  -0.0090712    6         3.6
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.101  -0.0027831    7      3.8667
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.106   0.0018435    8      4.1333
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.107   0.0029526    9         4.4
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.107   0.0029774   10      4.6667
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          49.105    0.001294   11      4.9333
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          45.747     -3.3568   12         5.2
+#          46.331     -2.7729   13      5.4667
+# Due to zero model norms, the following fit parameters are temporarily frozen:1 2 3 
+#          48.792    -0.31192   14      5.7333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+24 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          48.265     -0.8387   15           6
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+24 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+24 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#           48.08     -1.0244   16      6.2667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          48.981     -0.1232   17      6.5333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 6.09204e+18 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 6.09204e+18 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          49.103 -0.00063647   18         6.8
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          41.474     -7.6297   19      7.0667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 9.60137e+19 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 9.60137e+19 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          41.319     -7.7848   20      7.3333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          36.701     -12.403   21         7.6
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 5.7482e+19 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 5.7482e+19 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.195     -4.9091   22      7.8667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.101     -5.0031   23      8.1333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.101     -5.0031   24         8.4
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.101     -5.0031   25      8.6667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.101     -5.0031   26      8.9333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.101     -5.0031   27         9.2
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.101     -5.0031   28      9.4667
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.101     -5.0031   29      9.7333
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#          44.101     -5.0031   30          10
+#
+#A new best fit was found during steppar.
+#Parameters have been updated to the new best fit values.
+#
+# renorm: no renormalization necessary
+#                                   Parameters
+#Chi-Squared  |beta|/N    Lvl          1:nH    2:PhoIndex    3:HighECut        4:norm       5:LineE        8:norm
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#36.4779      7.23091      -3       999999.      -2.49580       333.875   1.00000e+20       7.61582  -4.52982e-07
+#36.4722      33135        -4       999999.      -2.49580       333.875   1.00000e+20       7.61348  -4.52961e-07
+#***Warning: Zero alpha-matrix diagonal element for parameter 1
+#***Warning: Zero alpha-matrix diagonal element for parameter 2
+#***Warning: Zero alpha-matrix diagonal element for parameter 3
+#***Warning: Zero alpha-matrix diagonal element for parameter 4
+# Parameter 1 is pegged at 999999 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 2 is pegged at -2.4958 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 3 is pegged at 333.875 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+# Parameter 4 is pegged at 1e+20 due to zero or negative pivot element, likely
+# caused by the fit being insensitive to the parameter.
+#36.4721      3868.24      -3       999999.      -2.49580       333.875   1.00000e+20       7.61379  -4.52981e-07
+#==============================
+# Variances and Principal Axes
+#                 5        8  
+# 9.6342E-04| -1.0000  -0.0000  
+# 1.6252E-14|  0.0000  -1.0000  
+#------------------------------
+#
+#========================
+#  Covariance Matrix
+#        1           2   
+#   9.634e-04   3.361e-10
+#   3.361e-10   1.637e-14
+#------------------------
+#
+#========================================================================
+#Model TBabs<1>*cutoffpl<2> + zgauss<3> Source No.: 1   Active/On
+#Model Model Component  Parameter  Unit     Value
+# par  comp
+#   1    1   TBabs      nH         10^22    9.99999E+05  +/-  -1.00000     
+#   2    2   cutoffpl   PhoIndex            -2.49580     +/-  -1.00000     
+#   3    2   cutoffpl   HighECut   keV      333.875      +/-  -1.00000     
+#   4    2   cutoffpl   norm                1.00000E+20  +/-  -1.00000     
+#   5    3   zgauss     LineE      keV      7.61379      +/-  3.10390E-02  
+#   6    3   zgauss     Sigma      keV      1.00000E-02  frozen
+#   7    3   zgauss     Redshift            2.00000E-03  frozen
+#   8    3   zgauss     norm                -4.52981E-07 +/-  1.27941E-07  
+#________________________________________________________________________
+#
+#
+#Fit statistic : Chi-Squared =          36.47 using 18 PHA bins.
+#
+#Test statistic : Chi-Squared =          36.47 using 18 PHA bins.
+# Reduced chi-squared =          3.039 for     12 degrees of freedom 
+# Null hypothesis probability =   2.719537e-04
+#
+!XSPEC12>plot contour
+#
+!XSPEC12>setplot command wdata wdata.dat
+#
+!XSPEC12>plot contour
+#
+!XSPEC12>mv wdata.dat fit_tbabscutoffpl+zgauss_con_e_0.01.dat
+#
+!XSPEC12>log none
+#

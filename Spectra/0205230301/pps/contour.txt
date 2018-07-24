@@ -1,0 +1,34 @@
+query yes
+statistic chi
+cpd /null
+data none
+model none
+log contour.log
+data P0205230301PNS003SRSPEC0002.FTZ
+back P0205230301PNS003BGSPEC0002.FTZ
+resp epn_e1_ff20_sY9_v16.0.rmf
+arf P0205230301PNS003SRCARF0002.FTZ
+ignore **-2.0 10.0-**
+ignore bad
+model tbabs*cutoffpl
+1.0,0.1
+2, 0.01
+15, 0.01
+1.E-4 1E-5
+fit
+save all fit_tbabscutoffpl.xcm
+setplot energy
+setplot rebin 3 10
+addc 3 zgauss
+1 0.01 0.5 0.5 8.0 8.0
+0.01,-1
+0.002,-1
+-1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10
+fit
+steppar 5 2 10. 30
+plot contour
+setplot command wdata wdata.dat
+plot contour
+mv wdata.dat fit_tbabscutoffpl+zgauss_con_e_0.01.dat
+log none
+exit
