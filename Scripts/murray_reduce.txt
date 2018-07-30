@@ -1,0 +1,79 @@
+### Initiate XMM SAS
+xmmsas
+
+### Set ODF and CCF paths environments
+setenv SAS_ODF /Users/murray/work/xmm/raw/0830191601/odf/
+setenv SAS_CCFPATH /Users/murray/ccf/
+
+### Build the calibration index file (cif)
+cifbuild
+
+### Set the CCF environment
+setenv SAS_CCF /Users/murray/work/xmm/raw/0830191601/ccf.cif
+
+### Run odfingest
+odfingest
+
+### Set ODF environment again to new file
+setenv SAS_ODF /Users/murray/work/xmm/raw/0830191601/3391_0830191601_SCX00000SUM.SAS
+
+### IF there are not PPS data, run epproc
+epproc
+
+### Make a separate directory for the reduced data
+mkdir ULX
+cd ULX
+
+### Copy the events file to the new directory. If you ran epproc, it will be called *ImagingEvts.ds
+cp ../3391_0830191601_EPN_S003_ImagingEvts.ds ./pn.fits
+
+### If you have the PPS files, the events file will be called *PIEVLI*
+ls PPS/*PIEVLI*
+mv PPS/P0677980701PNS003PIEVLI0000.FTZ ./pn.fits
+
+### Apply the barycenter correction #dont do this if you dont care about barycentric..
+cp pn.fits pn_bary.fits
+barycen table=pn_bary.fits:EVENTS
+
+### Check for flaring background by creating a lightcurve in the 10-12 keV band
+
+evselect table=pn.fits withfilteredset=yes expression='(PATTERN == 0)&&(PI in [10000:12000])&&#XMMEA_EP' filteredset=pn_pat0_en10-12.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0_en10-12_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=100 makeratecolumn=yes
+
+### Look at the lighcurve
+fv pn_pat0_en10-12_ltcrv.fits
+
+### If background is flaring (i.e. RATE > 0.4) make a 'good time interval' (gti) file
+
+tabgtigen table=pn_pat0_en10-12_ltcrv.fits expression='RATE<=0.4' gtiset=lowbg_gti.fits
+
+### Look at the image in DS9 to determine source and background regions
+ds9 pn.fits
+
+### Create a source spectrum, filtering on pattern (0), energy (0.2-10 keV), time (gti) and region (circle centered on the source)
+
+
+#Change the radius and the detector coordinates, wrt DS9
+
+evselect table='pn.fits' withfilteredset=yes expression='(PATTERN ==0)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(26667,27765,600))' filteredset=pn_pat0_en0.2-10_src_30.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0_en0.2-10_src_30_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0_src_30_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+
+### Create a background spectrum, filtering on pattern (0), energy (0.2-10 keV), time (gti) and region (larger circle near the source)
+
+evselect table='pn.fits' withfilteredset=yes expression='(PATTERN ==0)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(27768,24383,2389))' filteredset=pn_pat0_en0.2-10_bgd2.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0_en0.2-10_bgd2_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0_bgd2_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+
+### Apply backscale correction to account for the different 
+backscale spectrumset='pn_pat0_src_30_pi.fits'
+backscale spectrumset='pn_pat0_bgd2_pi.fits'
+
+### Make the RMF
+rmfgen rmfset=pn_pat0_src_30.rmf spectrumset='pn_pat0_src_30_pi.fits'
+
+### Make the ARF
+arfgen arfset=pn_pat0_src_30.arf spectrumset='pn_pat0_src_30_pi.fits' withrmfset=yes rmfset=pn_pat0_src_30.rmf
+
+### Group the spectrum so that there are a certain minimum number of counts in each spectrum. For chi^2 fitting, you need a minumum of 20 counts per group, but for Cash statistic, you need only a minimum of 1 count per min. Do both.
+
+grppha pn_pat0_src_30_pi.fits pn_pat0_src_30_pi_20.fits "group min 20" exit
+grppha pn_pat0_src_30_pi.fits pn_pat0_src_30_pi_1.fits "group min 1" exit
+
+
+### Then load your data into XPSEC as you did before!
