@@ -5,15 +5,15 @@ cd Documents/Caltech/0672130701
 
 export SAS_DIR=/Users/Anne/Documents/Caltech/SAS/xmmsas_20180620_1732/
 export SAS_ODF=/Users/Anne/Documents/Caltech/0672130701/
-export SAS_CCFPATH=/Users/Anne/Caltech/Documents/ccf/
+export SAS_CCFPATH=/Users/Anne/Documents/Caltech/CCFs
 
 cifbuild
 
 export SAS_CCF=/Users/Anne/Documents/Caltech/0672130701/ccf.cif
 
-odfingest
+# odfingest
 
-export SAS_ODF=/Users/Anne/Documents/Caltech/xmmdata/0672130701/odf/3391_0830191601_SCX00000SUM.SAS
+# export SAS_ODF=/Users/Anne/Documents/Caltech/xmmdata/0672130701/odf/3391_0830191601_SCX00000SUM.SAS
 
 
 mkdir ULX
@@ -33,10 +33,10 @@ tabgtigen table=pn_pat0_en10-12_ltcrv.fits expression='RATE<=0.4' gtiset=lowbg_g
 
 
 #spectrum
-evselect table='pn.fits' withfilteredset=yes expression='(PATTERN ==0)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(26667,27765,600))' filteredset=pn_pat0_en0.2-10_src_30.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0_en0.2-10_src_30_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0_src_30_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+evselect table='pn.fits' withfilteredset=yes expression='(PATTERN ==0)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(24049,24810,600))' filteredset=pn_pat0_en0.2-10_src_30.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0_en0.2-10_src_30_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0_src_30_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
 #background
-evselect table='pn.fits' withfilteredset=yes expression='(PATTERN ==0)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(27768,24383,2389))' filteredset=pn_pat0_en0.2-10_bgd2.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0_en0.2-10_bgd2_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0_bgd2_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+evselect table='pn.fits' withfilteredset=yes expression='(PATTERN ==0)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(24938,28221,1821))' filteredset=pn_pat0_en0.2-10_bgd2.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0_en0.2-10_bgd2_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0_bgd2_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
 #backscale
 backscale spectrumset='pn_pat0_src_30_pi.fits'
