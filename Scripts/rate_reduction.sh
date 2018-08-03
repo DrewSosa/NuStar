@@ -33,6 +33,9 @@ mv pps/P0200470101PNS003PIEVLI0000.FTZ ./pn.fits
 
 #Automated part starts here
 
+read -p "WARNING! Correct Observation and Detector coordinates must be set before running the automated script! Press enter to continue" warning
+
+
 #List of parameters that we want to vary.
 radii=("30" "40" "50"  "60")
 patterns=("0-4" "0")
@@ -51,7 +54,7 @@ for pattern in ${patterns[@]}; do
 			tabgtigen table=pn_pat${pattern}_en10-12_ltcrv.fits expression='RATE<=${rate}' gtiset=lowbg_gti.fits
 
 			#DS9!!!!
-
+			#Detector coordinates for the observation must be set!!!!!
 
 			#spectrum
 			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<=${pattern})&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(26667,27766,${detector_radius}))' filteredset=pn_pat${pattern}_en0.2-10_src_${radius}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat${pattern}_en0.2-10_src_${radius}_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat${pattern}_src_${radius}_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479

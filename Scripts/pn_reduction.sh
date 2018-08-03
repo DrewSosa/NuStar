@@ -54,4 +54,4 @@ arfgen arfset=pn_pat0-4_src_30.arf spectrumset='pn_pat0-4_src_30_pi.fits' withrm
 grppha pn_pat0-4_src_30_pi.fits pn_pat0-4_src_30_pi_20.fits "group min 20" exit
 grppha pn_pat0-4_src_30_pi.fits pn_pat0-4_src_30_pi_1.fits "group min 1" exit
 
-#awk command --> log show all, get the chi-squared statisti, do int () type ... vary the pattern, and radius and rate.....
+#awk command --> log show all, get the chi-squared statisti, do int () type ... vary the pattern, and radius and rate, just test 0.1 width. 
