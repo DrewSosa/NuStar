@@ -1,21 +1,32 @@
 
+
+	#specific
 	read -p "Observation ID: " obs_id
 
+	#Change into the correct directory.
 	cd
 	cd Documents/Caltech/${obs_id}/ULX
 
+	#Clean DelC document each run
 	rm delc_document
- 	radii=("30" "40" "50" "60");
- 	energies=("5" "6"  "7"  "8")
+
+	#Lists that allow for easy variation of parameters
+ 	radii=("30" "40" "50" "60")
+ 	energies=("5")
  	widths=("0.1" "0.3")
  	patterns={"0" "0-4"}
- 	echo "Delc Energy Width Patter" >> delc_document.txt
+
+	#Title
+	echo "${obs_id}" >> delc_document
+ 	echo "Delc Energy Width Pattern" >> delc_document.txt
+
+	#Iterate through different combinations of parameters.
 	for pattern in ${patterns}; do
 		for radius in ${radii[@]}; do
-			echo $radius
 			for energy in ${energies[@]}; do
 				for width in ${widths[@]}; do
 
+					#To avoid periods in the files.
 					if [ $width = "0.1" ]
 					then
 						filewidth="01"
@@ -24,15 +35,15 @@
 					then
 						filewidth="03"
 					fi
-					#Clean documentation files.
 
+					#Clean documentation files.
 					rm ${radius}_${energy}-${filewidth}_${pattern}.xco
-					rm plot_${radius}_delc
 					rm ${radius}_${energy}-${filewidth}_${pattern}.log
 					rm plot_${radius}_${energy}_${filewidth}_${pattern}_delc
 					rm zgauss_${radius}_${energy}-${filewidth}_${pattern}.log
 					rm log tbabs_${radius}_${energy}-${filewidth}_${pattern}.log
 
+					# Look for files that correspond to the given parameters ands assign them to a variable.
 					datafile="$(ls | grep "${pattern}" | grep "$radius" | grep "20.fits")"
 					respdata="$(ls | grep "${pattern}"| grep "$radius" | grep ".rmf")"
 					arf="$(ls | grep "${pattern}" | grep "$radius" | grep ".arf")"
@@ -41,6 +52,7 @@
 
 					echo "query yes" >> ${radius}_${energy}-${filewidth}_${pattern}.xco
 
+					#Put in the corredct files and output them to a parameter specific XSPEC file.
 					echo "data $datafile" >> ${radius}_${energy}-${filewidth}_${pattern}.xco
 					echo "back $bgfile" >> ${radius}_${energy}-${filewidth}_${pattern}.xco
 					echo "resp $respdata" >> ${radius}_${energy}-${filewidth}_${pattern}.xco
@@ -103,24 +115,26 @@
 					xspec - ${radius}_${energy}-${filewidth}_${pattern}.xco
 
 					#strip the chi squared value and perform arithmetic to get delc.
-					filename1="/Users/Anne/Documents/Caltech/${obs_id}/ULX/tbabs_${radius}_${energy}-${filewidth}_${pattern}.log"
-					tbabs_chi=$(awk  '/Fit statistic : Chi-Squared =/ {print $6}' $filename1)
+					tbabs_file="/Users/Anne/Documents/Caltech/${obs_id}/ULX/tbabs_${radius}_${energy}-${filewidth}_${pattern}.log"
+					tbabs_chi=$(awk  '/Fit statistic : Chi-Squared =/ {print $6}' $tbabs_file)
 
-					filename2="/Users/Anne/Documents/Caltech/${obs_id}/ULX/zgauss_${radius}_${energy}-${filewidth}_${pattern}.log"
-					zgauss_chi=$(awk  '/Fit statistic : Chi-Squared =/ {print $6}' $filename2)
+					zgauss_file="/Users/Anne/Documents/Caltech/${obs_id}/ULX/zgauss_${radius}_${energy}-${filewidth}_${pattern}.log"
+					zgauss_chi=$(awk  '/Fit statistic : Chi-Squared =/ {print $6}' $zgauss_file)
 
-					echo $zgauss_chi
+
 					delc=$(bc <<< "${tbabs_chi}-${zgauss_chi}")
-
 					echo "$delc ${radius} ${energy} ${width} ${pattern}	" >> delc_document.txt
-					echo "$obs_id"
 
-					echo "files ordered such that [radius]_[energy]-[width]_[pattern]"
+
+
 
 				done
 			done
 		done
 	done
+	#Easu indicators to format and observation.
+	echo "Observation ID operated on: $obs_id"
+	echo "Files ordered such that [radius]_[energy]-[width]_[pattern]"
 	#formal text into a readable table!
 	column -t  delc_document.txt >> table_${radius}_${energy}_${width}_${pattern}.txt.txt
 

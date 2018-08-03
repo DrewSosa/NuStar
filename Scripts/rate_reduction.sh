@@ -1,5 +1,8 @@
 #!/bin/bash
 #Manual parts. You have to enter these in. They depend on what source you are looking at.
+
+
+#Change into the correct directory.
 cd
 cd Documents/Caltech/0112520701
 
@@ -7,15 +10,17 @@ export SAS_DIR=/Users/Anne/Documents/Caltech/SAS/xmmsas_20180620_1732/
 export SAS_ODF=/Users/Anne/Documents/Caltech/0112520701/
 export SAS_CCFPATH=/Users/Anne/Documents/Caltech/CCFs/
 
+#Build the CCF file
 cifbuild
 
 export SAS_CCF=/Users/Anne/Documents/Caltech/0112520701/ccf.cif
 
+#No need for odfingest if the pps files exist already? I don't know. - Andrew.
 # odfingest
 
 # export SAS_ODF=/Users/Anne/Documents/Caltech/xmmdata/0672130701/odf/3391_0830191301_SCX00000SUM.SAS
 
-
+#Make the ULX folder. Up to the user to decide where the working directory is.
 mkdir ULX
 cd ULX
 
@@ -23,7 +28,6 @@ ls pps/*PIEVLI*
 mv pps/P0200470101PNS003PIEVLI0000.FTZ ./pn.fits
 
 
-# evselect table=pn.fits withfilteredset=yes expression='(PATTERN <= 4)&&(PI in [10000:12000])&&#XMMEA_EP' filteredset=pn_pat${pattern}_en10-12.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat${pattern}_en10-12_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=100 makeratecolumn=yes
 ### Check for flaring background by creating a lightcurve in the 10-12 keV band
 #fv pn_pat${pattern}_en10-12_ltcrv.fits
 
