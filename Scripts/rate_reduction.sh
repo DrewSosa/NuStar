@@ -46,7 +46,7 @@ for pattern in ${patterns[@]}; do
 		for rate in ${rates[@]}; do
 
 			#Calculate the detector radius. ****** MAKE SURE THIS WORKS
-			detector_radius=$(expr $rate \* 200)
+			detector_radius=$(expr $radius \* 20)
 
 			#I usually don't automate the line below, but we don't necessarily care about the light curve in this script.
 			evselect table=pn.fits withfilteredset=yes expression='(PATTERN <= ${pattern})&&(PI in [10000:12000])&&#XMMEA_EP' filteredset=pn_pat${pattern}_en10-12.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat${pattern}_en10-12_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=100 makeratecolumn=yes
