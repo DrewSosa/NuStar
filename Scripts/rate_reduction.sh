@@ -1,6 +1,6 @@
 #!/bin/bash
-
-cd 
+#Manual parts. You have to enter these in. They depend on what source you are looking at.
+cd
 cd Documents/Caltech/0112520701
 
 export SAS_DIR=/Users/Anne/Documents/Caltech/SAS/xmmsas_20180620_1732/
@@ -23,18 +23,26 @@ ls pps/*PIEVLI*
 mv pps/P0200470101PNS003PIEVLI0000.FTZ ./pn.fits
 
 
-evselect table=pn.fits withfilteredset=yes expression='(PATTERN <= 4)&&(PI in [10000:12000])&&#XMMEA_EP' filteredset=pn_pat${pattern}_en10-12.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat${pattern}_en10-12_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=100 makeratecolumn=yes
+# evselect table=pn.fits withfilteredset=yes expression='(PATTERN <= 4)&&(PI in [10000:12000])&&#XMMEA_EP' filteredset=pn_pat${pattern}_en10-12.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat${pattern}_en10-12_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=100 makeratecolumn=yes
 ### Check for flaring background by creating a lightcurve in the 10-12 keV band
-
 #fv pn_pat${pattern}_en10-12_ltcrv.fits
-radii=("30" "40"  "50"  "60")
-patterns=("${pattern}" "0")
+
+#Automated part starts here
+
+#List of parameters that we want to vary.
+radii=("30" "40" "50"  "60")
+patterns=("0-4" "0")
 rates=("0.7" "3" "7" "10" )
+#For loop for combinations of varied parameters.
 for pattern in ${patterns[@]}; do
 	for radius in ${radii[@]}; do
 		for rate in ${rates[@]}; do
+
+			#Calculate the detector radius. ****** MAKE SURE THIS WORKS
 			detector_radius=$(expr $rate \* 200)
-			evselect table=pn.fits withfilteredset=yes expression='(PATTERN <= 4)&&(PI in [10000:12000])&&#XMMEA_EP' filteredset=pn_pat${pattern}_en10-12.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat${pattern}_en10-12_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=100 makeratecolumn=yes
+
+			#I usually don't automate the line below, but we don't necessarily care about the light curve in this script.
+			evselect table=pn.fits withfilteredset=yes expression='(PATTERN <= ${pattern})&&(PI in [10000:12000])&&#XMMEA_EP' filteredset=pn_pat${pattern}_en10-12.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat${pattern}_en10-12_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=100 makeratecolumn=yes
 
 			tabgtigen table=pn_pat${pattern}_en10-12_ltcrv.fits expression='RATE<=${rate}' gtiset=lowbg_gti.fits
 
@@ -57,11 +65,14 @@ for pattern in ${patterns[@]}; do
 			#arf
 			arfgen arfset=pn_pat${pattern}_src_${radius}.arf spectrumset='pn_pat${pattern}_src_${radius}_pi.fits' withrmfset=yes rmfset=pn_pat${pattern}_src_${radius}.rmf
 
-			#group the spectrum 
-			grppha pn_pat${pattern}_src_${radius}_pi.fits pn_pat${pattern}_src_${radius}_pi_20.fits "group min 20" exit
-			grppha pn_pat${pattern}_src_${radius}_pi.fits pn_pat${pattern}_src_${radius}_pi_1.fits "group min 1" exit
+			#check if grouped spectrum exists. If not, group the spectrum!
+			if [ ! -f pn_pat${pattern}_src_${radius}_pi_20.fits ] || [! -f pn_pat${pattern}_src_${radius}_pi_1.fits] ; then
+				grppha pn_pat${pattern}_src_${radius}_pi.fits pn_pat${pattern}_src_${radius}_pi_20.fits "group min 20" exit
+				grppha pn_pat${pattern}_src_${radius}_pi.fits pn_pat${pattern}_src_${radius}_pi_1.fits "group min 1" exit
+    			echo "File not found!"
+			fi
+
 		done
 	done
 done
 
-			#awk command --> log show all, get the chi-squared statisti, do int () type ... vary the pattern, and radius and rate, just test 0.1 width. 
