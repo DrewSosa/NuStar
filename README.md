@@ -1,3 +1,7 @@
 # NuStar
-NuStar 2018
+Nasa NuStar Analysis Scripts 
+Andrew Sosanya, Caltech SRL Summer Fellow. Check me out here: https://rcweb.dartmouth.edu/~sosa/
 
+Our high-energy astrophysics group studies energetic phenomena ranging from gamma-ray bursts, black holes on all mass scales, to neutron stars, supernovae remnants and collapsed stars. We are especially interested in X-ray sources in numerous galaxies.
+
+Ultraluminous X-ray sources (ULXs) are variable, non-nuclear bright X-ray sources that exceed the Eddington limit for stellar-mass black holes (10 M⊙). The discovery of X-ray pulsations suggests that these ULXs may be powered by accretion from spin-up magnetized neutron stars onto compact stellar remnants. However, past research shows that estimations of the magnetic fields of these neutron stars are still uncertain. We seek to find signatures of magnetic fields through cyclotron resonance scattering features (CRSFs) in ULX-abundant galaxies. Using data from the Chandra and XMM-Newton high-energy X-ray telescopes, we conducted a systematic search for cyclotron scattering resonance features (CSRFs) that suggest accretion from magnetized neutron stars. From these lines, we can estimate the magnetic field using the proton transition energy. After narrowing down potential sources, we present our findings from the spectral analysis of various ULXs. These findings provide further insight into analysis techniques for future searches for neutron star-powered ULXs and estimation of their magnetic field strengths.
