@@ -1,0 +1,23 @@
+log 60.log
+data 
+back pn_pat0_bgd2_pi.fits
+resp 
+arf 
+ignore **-2.0 10.0-**
+ignore bad
+model tbabs*cutoffpl
+1.0,0.1
+2, 0.01
+15, 0.01
+1.E-4 1E-5
+fit
+setplot energy
+setplot rebin 3 10
+addc 3 zgauss
+1 0.01 0.5 0.5 8.0 8.0
+0.1,-1
+0.002,-1
+-1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10
+fit
+hardcopy plot_
+exit
