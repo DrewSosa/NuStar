@@ -29,17 +29,17 @@ cd ULX
 
 
 ### Check for flaring background by creating a lightcurve in the 10-12 keV band
-#fv pn_pat${pattern}_en10-12_ltcrv.fits
+#fv pn_ltcrv_en10-12_pat${pattern}__${radius}_${rate//.}.fits
 
 #Automated part starts here
 read -p "Files are generally ordered such that [pattern -> radius-> rate//.].fits Press enter to continue" warning
-read -p "WARNING! Correct Observation and Detector coordinates (via DS9) must be set before running the automated script! Press enter to continue" warning
+read -p "WARNING! Correct Observation and Detector coordinates (via DS9) must appear in script before running the automated script! Press enter to continue" warning
 
 
 #List of parameters that we want to vary.
 radii=("30" "40" "50")
 patterns=("0-4" "0")
-rates=("0.4" "0.7")
+rates=("0.4")
 #For loop for combinations of varied parameters.
 for pattern in ${patterns[@]}; do
 	if [ $pattern="0" ]
@@ -65,7 +65,7 @@ for pattern in ${patterns[@]}; do
 
 			# For further detail, the syntax of the below $rate variable is ${string//substring/replacement},
 			# where apparently the lack of the final forward slash and replacement string are interpreted as delete.
-			tabgtigen table=pn_src_ltcrv_en10-12_pat${pattern}_${radius}_${rate//.}.fits expression='RATE<='"${rate//.}"'' gtiset=lowbg_gti.fits
+			tabgtigen table=pn_ltcrv_en10-12_pat${pattern}_${radius}_${rate//.}.fits expression='RATE<='"${rate}"'' gtiset=lowbg_gti.fits
 
 			
 
@@ -73,14 +73,14 @@ for pattern in ${patterns[@]}; do
 			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(24125,24618,'"${detector_radius}"'))' filteredset=pn_src_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_ltcrv_en0.2-10_${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
 			#background
-			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(23848,29389,1000))' filteredset=pn_bgd2_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_bgd2_ltcrv_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makerate//.column=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_bgd2_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(23848,29389,1000))' filteredset=pn_bgd2_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_bgd2_ltcrv_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_bgd2_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
 			#backscale
 			backscale spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits'
 			backscale spectrumset='pn_bgd2_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits'
 
 			#rmf
-			rmfgen rmfset=pn_src_pat${pattern}_${radius}_${rate//.}.rmf spectrumset='pn_src_pat'"${pattern}"''"${radius}"'_'"${rate//.}"'_pi.fits'
+			rmfgen rmfset=pn_src_pat${pattern}_${radius}_${rate//.}.rmf spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits'
 
 			#arf
 			arfgen arfset=pn_src_pat${pattern}_${radius}_${rate//.}.arf spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' withrmfset=yes rmfset=pn_src_pat${pattern}_${radius}_${rate//.}.rmf
