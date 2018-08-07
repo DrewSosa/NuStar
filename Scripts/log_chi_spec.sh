@@ -15,16 +15,16 @@
  	energies=("6.25")
  	widths=("0.1")
  	patterns=("0" "0-4")
- 	rates=("0.4")
+ 	rates=("1")
 
 	#Title
 
 	rm delc_document.txt
 	echo "${obs_id}" >> delc_document.txt
- 	echo "Delc Radius Energy Width Pattern" >> delc_document.txt
+ 	echo " Delc Pattern Radius Energy Width Rate" >> delc_document.txt
 
 	#Iterate through different combinations of parameters.
-	for pattern in ${patterns}; do
+	for pattern in ${patterns[@]}; do
 		for radius in ${radii[@]}; do
 			for energy in ${energies[@]}; do
 				for width in ${widths[@]}; do
@@ -35,12 +35,12 @@
 					
 
 						#Clean documentation files.
-						rm table_${radius}_${energy}_${width//.}_${pattern}.txt
+						
 						rm ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						rm ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 						
 						rm zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
-						rm log tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
+						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 
 						# Look for files that correspond to the given parameters ands assign them to a variable.
 						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}"| grep "20.fits")"
@@ -85,7 +85,7 @@
 						echo "setplot rebin 3 10" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "plot ldata" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 
-						echo "hardcopy plot_${radius}_${pattern} color" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
+						#echo "hardcopy plot_${radius}_${pattern} color" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "addc 3 zgauss" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#energy
 						echo "$energy 0.01 0.5 0.5 8.0 8.0" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
@@ -107,7 +107,7 @@
 						echo "log none" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 
 						#save the plot
-						echo "hardcopy plot_${radius}_${energy}_${width//.}_${pattern}_delc color" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
+						echo "hardcopy plot_${pattern}_${radius}_${energy//.}_${width//.}_delc color" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "exit" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 
 						#launch XSPEC
@@ -122,23 +122,23 @@
 
 						delc=$(bc <<< "${tbabs_chi}-${zgauss_chi}")
 						
-						echo "$delc ${radius} ${energy} ${width} ${pattern} ${rate//.}	" >> delc_document.txt
+						echo "$delc ${pattern} ${radius} ${energy} ${width} ${rate}	" >> delc_document.txt
 
-						break
+						
 
 
 					done
-					break
+					
 				done
-				break 
+				
 			done
 		done
 	done
 
-	#Easu indicators to format and observation.
+	#Easy indicators to format and observation.
 	echo "Observation ID operated on: $obs_id"
 
 	echo "Files ordered such that [pattern]_[radius]_[energy//.]-[width//.]_[rate//.]"
 	#formal text into a readable table!
-	column -t  delc_document.txt >> table_${radius}_${energy}_${width}_${pattern}.txt
+	column -t  delc_document.txt >> table.txt
 

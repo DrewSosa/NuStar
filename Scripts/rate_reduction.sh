@@ -4,16 +4,16 @@
 #works in conjunction with log_chi_spec.sh
 #Change into the correct directory.
 cd
-cd Documents/Caltech/0672130101
+cd Documents/Caltech/0672130701
 
 export SAS_DIR=/Users/Anne/Documents/Caltech/SAS/xmmsas_20180620_1732/
-export SAS_ODF=/Users/Anne/Documents/Caltech/0672130101/
+export SAS_ODF=/Users/Anne/Documents/Caltech/0672130701/
 export SAS_CCFPATH=/Users/Anne/Documents/Caltech/CCFs/
 
 #Build the CCF file
 cifbuild
 
-export SAS_CCF=/Users/Anne/Documents/Caltech/0672130101/ccf.cif
+export SAS_CCF=/Users/Anne/Documents/Caltech/0672130701/ccf.cif
 
 #No need for odfingest if the pps files exist already? I don't know. - Andrew.
 # odfingest
@@ -25,7 +25,7 @@ export SAS_CCF=/Users/Anne/Documents/Caltech/0672130101/ccf.cif
 
 cd ULX
 # ls pps/*PIEVLI*
-# mv pps/P0672130101PNS002PIEVLI0000.FTZ ./pn.fits
+# mv pps/P0672130701PNS002PIEVLI0000.FTZ ./pn.fits
 
 
 ### Check for flaring background by creating a lightcurve in the 10-12 keV band
@@ -39,7 +39,7 @@ read -p "WARNING! Correct Observation and Detector coordinates (via DS9) must ap
 #List of parameters that we want to vary.
 radii=("30" "40" "50")
 patterns=("0-4" "0")
-rates=("0.4")
+rates=("1")
 #For loop for combinations of varied parameters.
 for pattern in ${patterns[@]}; do
 	if [ $pattern="0" ]
@@ -70,10 +70,10 @@ for pattern in ${patterns[@]}; do
 			
 
 			#spectrum
-			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(24125,24618,'"${detector_radius}"'))' filteredset=pn_src_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_ltcrv_en0.2-10_${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(24021,24809,'"${detector_radius}"'))' filteredset=pn_src_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_ltcrv_en0.2-10_${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
 			#background
-			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(23848,29389,1000))' filteredset=pn_bgd2_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_bgd2_ltcrv_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_bgd2_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(24421,27908,1642))' filteredset=pn_bgd2_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_bgd2_ltcrv_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_bgd2_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
 			#backscale
 			backscale spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits'
