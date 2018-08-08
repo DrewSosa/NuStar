@@ -1,5 +1,4 @@
-
-
+	#!/bin/bash
 	#specific
 	read -p "Observation ID: " obs_id
 
@@ -11,11 +10,11 @@
 	rm delc_document.txt
 
 	#Lists that allow for easy variation of parameters
- 	radii=("30" "40" "50")
- 	energies=("6.25")
+ 	radii=("60")
+ 	energies=("5.75" "8")
  	widths=("0.1")
- 	patterns=("0" "0-4")
- 	rates=("1")
+ 	patterns=("0")
+ 	rates=("0.7" "2")
 
 	#Title
 
@@ -43,10 +42,10 @@
 						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 
 						# Look for files that correspond to the given parameters ands assign them to a variable.
-						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}"| grep "20.fits")"
-						respdata="$(ls | grep "pat${pattern}_"| grep "$radius" | grep "${rate//.}" | grep ".rmf")"
-						arf="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}" | grep ".arf")"
-						bgfile="$(ls | grep "bgd2_pat" | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}" | grep ".fits")"
+						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
+						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
+						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
+						bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
 					
 						echo $datafile 
 
@@ -90,13 +89,16 @@
 						#energy
 						echo "$energy 0.01 0.5 0.5 8.0 8.0" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#width
-						echo "$width, -1" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
+						echo "$width,-1" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#normalization
 						echo "0.002,-1" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 
 						echo "-1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "fit" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
+						echo "thaw 6" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
+						echo "fit" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#fix the plot.
+						
 						echo "setplot energy" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "setplot rebin 3 10" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "plot ld delc" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
@@ -107,6 +109,7 @@
 						echo "log none" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 
 						#save the plot
+						echo "save all fit_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xcm" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "hardcopy plot_${pattern}_${radius}_${energy//.}_${width//.}_delc color" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "exit" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 
@@ -142,3 +145,4 @@
 	#formal text into a readable table!
 	column -t  delc_document.txt >> table.txt
 
+#thaw 6" / "error 6" "rerun0 40 5.75 0.1, get plot"

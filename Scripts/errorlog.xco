@@ -1,0 +1,23 @@
+@fit_0_60_3-01_2.xcm
+fit
+error 5
+error 6
+exit
+@fit_0_60_3-01_2.xcm
+fit
+error 5
+error 6
+exit
+cd Documents/Caltech/0206890101/ULX
+@fit_0_60_3-01_2.xcm
+fit
+error 5
+error 6
+exit
+cd
+cd Documents/Caltech/0206890101/ULX
+@fit_0_60_3-01_2.xcm
+fit
+error 5
+error 6
+exit
