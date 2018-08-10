@@ -11,10 +11,10 @@
 
 	#Lists that allow for easy variation of parameters
  	radii=("60")
- 	energies=("5.75" "8")
+ 	energies=("5.75" "6" "6.2")
  	widths=("0.1")
  	patterns=("0")
- 	rates=("0.7" "2")
+ 	rates=("2")
 
 	#Title
 
@@ -37,6 +37,7 @@
 						
 						rm ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						rm ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
+						rm fit_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xcm
 						
 						rm zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
@@ -65,7 +66,7 @@
 						# Define the model
 						echo "model tbabs*cutoffpl" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#Absoprtion
-						echo "1.0 ,0.1" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
+						echo "1 ,0.1" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#powerlaw index/gamma
 						echo "2, 0.01" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#Cuttoff energy
@@ -87,7 +88,7 @@
 						#echo "hardcopy plot_${radius}_${pattern} color" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "addc 3 zgauss" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#energy
-						echo "$energy 0.01 0.5 0.5 8.0 8.0" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
+						echo "$energy 0.01 0.5 0.5 9.0 9.0" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#width
 						echo "$width,-1" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#normalization
@@ -115,18 +116,18 @@
 
 						#launch XSPEC
 						xspec - ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
-
+						rm ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#strip the chi squared value from both tbabs and zgauss models and perform arithmetic to get delc.
 						tbabs_file="/Users/Anne/Documents/Caltech/${obs_id}/ULX/tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log"
 						tbabs_chi=$(awk  '/Fit statistic : Chi-Squared =/ {print $6}' $tbabs_file)
 
 						zgauss_file="/Users/Anne/Documents/Caltech/${obs_id}/ULX/zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log"
 						zgauss_chi=$(awk  '/Fit statistic : Chi-Squared =/ {print $6}' $zgauss_file)
-
+						LineE=$(awk  '/LineE      keV / {print $7}' $zgauss_file)
 						delc=$(bc <<< "${tbabs_chi}-${zgauss_chi}")
 						
-						echo "$delc ${pattern} ${radius} ${energy} ${width} ${rate}	" >> delc_document.txt
-
+						echo "$delc ${pattern} ${radius} ${LineE} ${width} ${rate}	" >> delc_document.txt
+						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 						
 
 
