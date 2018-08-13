@@ -1,36 +1,56 @@
+"""Author @Andrew Sosanya, NASA NuStar Team @Caltech
+
+Script to produce conjoined del-chi, flux, and contnour plots to aid spectral analysis 
+of ULXs and other X-ray sources."
+
+Notes from XSPEC about what each of these plots mean:
+
+delchi-Plot the residuals in terms of sigmas with error bars of size one. 
+In the case of the cstat and related statistics this plots (data-model)/error
+where error is calculated as the square root of the model predicted number of counts. 
+Note that in this case this is not the same as contributions to the statistic.
+
+Contour - Plot the results of the last steppar run. If this was over one parameter then a plot of statistic versus
+parameter value is produced while a steppar over two parameters results in a fit-statistic contour plot.
+
+Last updated 8/13/18
+andrew.sosanya.20@dartmouth.edu"""
+
+
+
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+import numpy.ma as ma
 import datetime
 import os
 import matplotlib.dates as mdates
-from spacepy import pycdf
-from scipy import interpolate
-import urllib
+
 from os.path import expanduser
 
-from grab_ra_dec import get_ra_dec
 
-home = expanduser("~")
-NEWPATH = "/Users/Anne/Documents/Caltech/M32"
+
+home = "/Users/Anne/Documents/Caltech/"
 M32_dir="/Users/Anne/Documents/Caltech/M32"
 
-freq = {}
 
-
+#list to hold values for plotting
 nodes = []
-ids = ["0672130101" "0672130701" "M32_Chandra" "0505760201" "0672130501"]
-counter = 0
-global_counter = 0
-for obs_id in os.listdir(M32_dir):
-    if obs_id == ".DS_Store": continue
-    if obs_id not in 
-    tags = get_ra_dec()
+#IDs to test
+ids = ["0672130101", "0672130701", "M32_Chandra", "0505760201", "0672130501"]
+for obs_id in ids:
+    
 
-    os.chdir(M32_dir+"/"+obs_id+"/"+"ULX")
+    
+    #change directory to that of the current obs_id
+    #create a 3x1 plot canvas, give it a title and autoscale it. 
+    os.chdir(home+"/"+obs_id+"/"+"ULX")
     fig, axarray = plt.subplots(3, 1, figsize=(9, 13), sharex=True)
-    plt.suptitle(tags[obs_id],fontsize=20, horizontalalignment='center')
+    plt.suptitle(obs_id,fontsize=20, horizontalalignment='center')
     axarray[0].autoscale()
 
     #delta-chi Plot
-    deltachi_energy_data = open("fit_flux_tbabscutoffpl_ld.dat")
+    deltachi_energy_data = open("fit_deltachi_tbabscutoffpl_delc.dat")
 
     energy = [float(x.split()[0]) for x in deltachi_energy_data.readlines() if len(x.split()) > 1 if "SERR" not in x.split()]
     deltachi_energy_data.seek(0)
@@ -49,9 +69,7 @@ for obs_id in os.listdir(M32_dir):
 
 
     nodes = []
-    #Chi-Squared
-    #0.03
-    os.chdir(M32_dir+"/"+obs_id+"/"+"ULX")
+    #Contour Plots
     chi_energy_data = open("fit_contour_tbabscutoffpl+zgauss.dat")
     energy = [x.split()[0] for x in chi_energy_data.readlines() if len(x.split()) > 1]
     chi_energy_data.seek(0)
@@ -61,8 +79,8 @@ for obs_id in os.listdir(M32_dir):
     nodes.append([energy, delta_chi, obs_id])
 
     axarray[1].set_xscale("log")
-    plot_003, = axarray[1].plot(nodes[0][0], nodes[0][1])
-    plot_003.set_label("0.1 gauss wdith")
+    contour_plot, = axarray[1].plot(nodes[0][0], nodes[0][1])
+    contour_plot.set_label("0.1 gauss wdith")
 
     nodes = []
 
@@ -92,5 +110,6 @@ for obs_id in os.listdir(M32_dir):
 
     #Have to backpedal into original directory so that we can save the plots.
 
-    os.chdir("/Users/Anne/Documents/Caltech/M32/")
-    plt.savefig('/Users/Anne/Documents/Caltech/1x10_plots/' + str(tags[obs_id])+ ".jpg" )
+    os.chdir(M32_dir)
+    plt.savefig('./' + obs_id)
+     

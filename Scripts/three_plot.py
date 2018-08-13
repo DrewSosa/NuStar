@@ -16,19 +16,18 @@ from os.path import expanduser
 from grab_ra_dec import get_ra_dec
 
 home = expanduser("~")
-NEWPATH = "/Users/Anne/Documents/Caltech/M32"
-spectra_dir="/Users/Anne/Documents/Caltech/"
+NEWPATH = "/Users/sosa/Documents/Caltech/fig"
+spectra_dir="/Users/sosa/Documents/Caltech/Spectra"
 
 freq = {}
 
 
 nodes = []
-ids = ["0672130101" "0672130701" "M32_Chandra" "0505760201" "0672130501"]
+
 counter = 0
 global_counter = 0
 for obs_id in os.listdir(spectra_dir):
     if obs_id == ".DS_Store": continue
-    if obs_id not in 
     tags = get_ra_dec()
 
     os.chdir(spectra_dir+"/"+obs_id+"/"+"pps")

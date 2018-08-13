@@ -11,7 +11,7 @@
 
 	#Lists that allow for easy variation of parameters
  	radii=("60")
- 	energies=("5.75" "6" "6.2")
+ 	energies=("5.75" "6" "6.2" "6.5")
  	widths=("0.1")
  	patterns=("0")
  	rates=("2")
@@ -43,13 +43,16 @@
 						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 
 						# Look for files that correspond to the given parameters ands assign them to a variable.
-						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
-						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
-						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
-						bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
+						# datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
+						# respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
+						# arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
+						# bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
 					
-						echo $datafile 
-
+						datafile="ULX1_grp.pi"
+						respdata="ULX1.rmf"
+						arf="ULX1.corr.arf"
+						bgfile="ULX1_bkg.pi"
+					
 
 						echo "query yes" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 
