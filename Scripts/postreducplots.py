@@ -13,6 +13,17 @@ Note that in this case this is not the same as contributions to the statistic.
 Contour - Plot the results of the last steppar run. If this was over one parameter then a plot of statistic versus
 parameter value is produced while a steppar over two parameters results in a fit-statistic contour plot.
 
+The fit statistic confidence contours are often drawn based on a relatively small grid (i.e., 5x5).
+ To understand fully what these plots are telling you, it is useful to know a couple of points 
+ concerning how the software chooses the location of the contour lines. 
+ The contour plot is drawn based only on the information contained in the sample grid. 
+ For example, if the minimum fit statistic occurs when parameter 1 equals 2.25 and you use steppar 1 1.0 5.0 4, 
+ then the grid values closest to the minimum are 2.0 and 3.0. This could mean that there are no grid points where delta-fit statistic is less than your lowest level (which defaults to 1.0). 
+ As a result, the lowest contour will not be drawn.
+ This effect can be minimized by always selecting a steppar range that causes XSPEC to step very close to the true minima.
+
+
+
 Last updated 8/13/18
 andrew.sosanya.20@dartmouth.edu"""
 
