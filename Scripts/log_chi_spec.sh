@@ -48,10 +48,17 @@
 						# arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
 						# bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
 					
-						datafile="ULX1_grp.pi"
-						respdata="ULX1.rmf"
-						arf="ULX1.corr.arf"
-						bgfile="ULX1_bkg.pi"
+						# datafile="ULX1_grp.pi"
+						# respdata="ULX1.rmf"
+						# arf="ULX1.corr.arf"
+						# bgfile="ULX1_bkg.pi"
+
+						#MOS DATA 
+						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
+						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
+						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
+						bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
+					
 					
 
 						echo "query yes" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco

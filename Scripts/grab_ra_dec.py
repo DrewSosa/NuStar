@@ -1,5 +1,5 @@
 """Finds Counts within the table and records their observer IDs
-@Andrew Sosanya, WAVE Astrophyscs Fellow at Caltech Space ra_listdiation Lab/NuStar, andrew.sosanya.20@dartmouth.edu"""
+@Andrew Sosanya, WAVE Astrophyscs Fellow at Caltech Space radiation Lab/NuStar, andrew.sosanya.20@dartmouth.edu"""
 
 
 sources = open("/Users/sosa/Documents/Caltech/Positions/potential_sources.txt")

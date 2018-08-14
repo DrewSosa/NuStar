@@ -1,4 +1,13 @@
 #!/bin/bash 
+
+# The fakeit command is used to create a number of spectrum files,
+# where the current model is multiplied by the response curves and then added to a realization of any background.
+# Statistical fluctuations can be included. The integration time and correction norm are requested for each file. 
+# The file names input as command line arguments are used as background. The number of faked spectra produced is the maximum of the number of spectra currently 
+# loaded and the number of file specifications in the command line arguments. 
+
+
+
 #Get Obs_iD to perform simulations on.
 read -p "Observation ID: " obs_id
 #Place to store results.
