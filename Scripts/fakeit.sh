@@ -11,7 +11,7 @@
 #Get Obs_iD to perform simulations on.
 read -p "Observation ID: " obs_id
 #Place to store results.
-RESULTS="/Users/Anne/Documents/Caltech/M32/sim/${obs_id}/6kev"
+RESULTS="/Users/Anne/Documents/Caltech/M32/sim/${obs_id}/65kev"
 
 # if (-e $RESULTS) rm $RESULTS
 # touch $RESULTS
@@ -26,7 +26,7 @@ for ((i=1;i<=$numsims;i++)); do
 		cd
 		cd Documents/Caltech/${obs_id}/ULX
 	   	
-		#load only the XCM file to get data
+		#load only the XCM file to get datax
 		echo "query yes" > sim.xco
 		echo "statistic chi" >> sim.xco
 		echo "cpd /null" >> sim.xco
@@ -41,14 +41,17 @@ for ((i=1;i<=$numsims;i++)); do
 		echo " " >> sim.xco
 		echo " " >> sim.xco
 		#Only include valid energies for XMM
-		echo "ignore **-0.2 10.-**" >> sim.xco
+
+		#for chandra, do **-0.5-8kev---
+		# echo "ignore **-0.2 10.-**" >> sim.xco
+		echo "ignore **-0.5 8.-**" >> sim.xco
 		echo "fit" >> sim.xco
 	        echo "log fit_tbabscutoffpl_fak.log" >> sim.xco
 	        echo "show all" >> sim.xco
 	        echo "log none" >> sim.xco
 		echo "addc 3 zgauss" >> sim.xco
 	#	echo "1 0.01 0.5 0.5 8.0 8.0" >> sim.xco
-		echo "6.0 0.01 2.5 2.5 10.0 10.0" >> sim.xco
+		echo "6.5 0.01 2.5 2.5 10.0 10.0" >> sim.xco
 	#	echo "0.01,-1" >> sim.xco
 		echo "0.1,-1" >> sim.xco
 		echo "0.002,-1" >> sim.xco
