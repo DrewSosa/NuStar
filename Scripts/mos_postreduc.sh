@@ -1,51 +1,48 @@
 #!/bin/bash
+#@Andrew Sosanya, WAVE Astrophyscs Fellow at Caltech Space radiation Lab/NuStar, andrew.sosanya.20@dartmouth.edu
+
 	#specific
 	read -p "Observation ID: " obs_id
-	read -p "XMM or Chandra? " sata
+
 
 	#Change into the correct directory.
 	cd
 	cd Documents/Caltech/${obs_id}/ULX
-
 	
-
-	#Lists that allow for easy variation of parameters
- 	
-	if [ ${sata} = "Chandra"]; then
-	do 
+ 	#Load EPIC-PN data
+	if [ ${obs_id} = "M32_Chandra"]; 
+	then
 		pndata="ULX1_grp.pi"
 		pnresp="ULX1.rmf"
 		pnarf="ULX1.corr.arf"
 		pnbgd="ULX1_bkg.pi"
 	else
-		datafile="$(ls | grep "pat0" | grep "60" | grep "12"| grep "20.fits")"
-		respdata="$(ls | grep "pat0_60_12.rmf")"
-		arf="$(ls | grep "pat0_60_12.arf")"
-		bgfile="$(ls | grep "bgd2_pat0_60_12_pi.fits")"
-					
+		pndata="pn_src_pat0_60_12_pi_20.fits"
+		pnresp="pn_src_pat0_60_12.rmf"
+		pnarf="pn_src_pat0_60_12.arf"
+		pnbgd="pn_bgd2_pat0_60_12_pi.fits"
+	fi
 
-
-					
-	
+	#Load EPIC-MOS Data
 	m1data="m1_spectrum_grp.fits"
 	m1resp="m1.rmf"
-	m1arf="m1_arf"
+	m1arf="m1.arf"
 	m1bgfile="m1_background_spectrum.fits"
 
 	m2data="m2_spectrum_grp.fits"
 	m2resp="m2.rmf"
-	m2arf="m2_arf"
+	m2arf="m2.arf"
 	m2bgfile="m2_background_spectrum.fits"
 
 
 	echo "query yes" > contour.txt
 
 	#Put in the correct files and output them to a parameter specific XSPEC file.
-	echo "data 1:1 ${m1data} 2:2 ${m2data}" >> contour.txt
-	echo "back 1:1 ${m1bgfile} 2:2 ${m2bgfile}" >> contour.txt
-	echo "resp 1:1 ${m1resp} 2:2 ${m2resp}" >> contour.txt
-	echo "arf 1:1 ${m1_arf} 2:2 ${m2arf}" >> contour.txt
-	echo "ignore **-2.0 10.0-**" >> contour.txt
+	echo "data 1:1 ${m1data} 2:2 ${m2data} 3:3 ${pndata}" >> contour.txt
+	echo "back 1:1 ${m1bgfile} 2:2 ${m2bgfile} 3:3 ${pnbgd}" >> contour.txt
+	echo "resp 1:1 ${m1resp} 2:2 ${m2resp} 3:3 ${pnresp}" >> contour.txt
+	echo "arf 1:1 ${m1arf} 2:2 ${m2arf} 3:3 ${pnarf}" >> contour.txt
+	echo "ignore 1-3: **-2.0 10.0-**" >> contour.txt
 	echo "ignore bad" >> contour.txt
 
 
@@ -64,6 +61,12 @@
 	echo "1.E-4 1E-5" >> contour.txt
 	
 	#Data Group 2
+	echo " " >> contour.txt
+	echo " " >> contour.txt
+	echo " " >> contour.txt
+	echo " " >> contour.txt
+
+	#Data Group 3
 	echo " " >> contour.txt
 	echo " " >> contour.txt
 	echo " " >> contour.txt
@@ -97,10 +100,20 @@
 	echo " " >> contour.txt
 	# Add a Gaussian absorption line (any energy)
 	echo " " >> contour.txt
+
+	#Data Group 3
+	echo " " >> contour.txt
+	#width
+	echo " " >> contour.txt
+	#normalization
+	echo " " >> contour.txt
+	# Add a Gaussian absorption line (any energy)
+	echo " " >> contour.txt
 	
 	echo "fit" >> contour.txt
 	echo "step 5 5.0 9.0 20" >> contour.txt
 	echo "step 13 5.0 9.0 20" >> contour.txt
+	echo "step 21 5.0 9.0 20" >> contour.txt
 	# echo "steppar log" >> contour.txt
 	echo "thaw 6" >> contour.txt
 	echo "thaw 14" >> contour.txt
@@ -132,11 +145,11 @@
 	#Load the data and restrict energy range
 
 	echo "log flux.log" >> flux.txt
-	echo "data 1:1 ${m1data} 2:2 ${m2data}" >> flux.txt
-	echo "back 1:1 ${m1bgfile} 2:2 ${m2bgfile}" >> flux.txt
-	echo "resp 1:1 ${m1resp} 2:2 ${m2resp}" >> flux.txt
-	echo "arf 1:1 ${m1_arf} 2:2 ${m2arf}" >> flux.txt
-	echo "ignore **-2.0 10.0-**" >> flux.txt #changed range to 2 keV from 0.2 keV
+	echo "data 1:1 ${m1data} 2:2 ${m2data} 3:3 ${pndata}" >> flux.txt
+	echo "back 1:1 ${m1bgfile} 2:2 ${m2bgfile} 3:3 ${pnbgd}" >> flux.txt
+	echo "resp 1:1 ${m1resp} 2:2 ${m2resp} 3:3 ${pnresp}" >> flux.txt
+	echo "arf 1:1 ${m1_arf} 2:2 ${m2arf} 3:3 ${pnarf}" >> flux.txt
+	echo "ignore 1-3: **-2.0 10.0-**" >> flux.txt #changed range to 2 keV from 0.2 keV
 	echo "ignore bad" >> flux.txt
 
 
@@ -149,11 +162,19 @@
 	echo "1.E-4 1E-5" >> flux.txt
 
 	#Data Group 2
-	echo "model tbabs*cutoffpl" >> flux.txt
+	
 	echo " " >> flux.txt
 	echo " " >> flux.txt
 	echo " " >> flux.txt
 	echo " " >> flux.txt
+
+	#Data Group 3
+	
+	echo " " >> flux.txt
+	echo " " >> flux.txt
+	echo " " >> flux.txt
+	echo " " >> flux.txt
+
 	#Fit the model
 	echo "fit" >> flux.txt
 
@@ -184,11 +205,11 @@
 	#Load the data and restrict energy range
 
 	echo "log delta_chi.log" >> delta_chi.txt
-	echo "data 1:1 ${m1data} 2:2 ${m2data}" >> delta_chi.txt
-	echo "back 1:1 ${m1bgfile} 2:2 ${m2bgfile}" >> delta_chi.txt
-	echo "resp 1:1 ${m1resp} 2:2 ${m2resp}" >> delta_chi.txt
-	echo "arf 1:1 ${m1_arf} 2:2 ${m2arf}" >> delta_chi.txt
-	echo "ignore **-2.0 10.0-**" >> delta_chi.txt #changed range to 2 keV from 0.2 keV
+	echo "data 1:1 ${m1data} 2:2 ${m2data} 3:3 ${pndata}" >> delta_chi.txt
+	echo "back 1:1 ${m1bgfile} 2:2 ${m2bgfile} 3:3 ${pnbgd}" >> delta_chi.txt
+	echo "resp 1:1 ${m1resp} 2:2 ${m2resp} 3:3 ${pnresp}" >> delta_chi.txt
+	echo "arf 1:1 ${m1_arf} 2:2 ${m2arf} 3:3 ${pnarf}" >> delta_chi.txt
+	echo "ignore 1-3: **-2.0 10.0-**" >> delta_chi.txt #changed range to 2 keV from 0.2 keV
 	echo "ignore bad" >> delta_chi.txt
 
 	# Define the model
@@ -198,7 +219,14 @@
 	echo "2, 0.01" >> delta_chi.txt
 	echo "15, 0.01" >> delta_chi.txt
 	echo "1.E-4 1E-5" >> delta_chi.txt
+	
 	#Data Group 2
+	echo " " >> delta_chi.txt
+	echo " " >> delta_chi.txt
+	echo " " >> delta_chi.txt
+	echo " " >> delta_chi.txt
+
+	#Data Group 3
 	echo " " >> delta_chi.txt
 	echo " " >> delta_chi.txt
 	echo " " >> delta_chi.txt
