@@ -4,6 +4,7 @@ from statistics import stdev
 
 sources = open("/Users/Anne/Documents/Caltech/M32/sim/M32_Chandra/65kev")
 counter = 0 
+
 for i in  sources.readlines():
 	if float(i.split()[3]) > 11: counter+=1
 
@@ -14,3 +15,4 @@ data = [float(x.split()[3]) for x in sources.readlines()]
 print (counter)
 d = stdev(data)
 print (d)
+print (len(data))

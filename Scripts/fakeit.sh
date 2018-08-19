@@ -11,13 +11,13 @@
 #Get Obs_iD to perform simulations on.
 read -p "Observation ID: " obs_id
 #Place to store results.
-RESULTS="/Users/Anne/Documents/Caltech/M32/sim/${obs_id}/65kev"
+RESULTS="/Users/Anne/Documents/Caltech/M32/sim/${obs_id}/6kev"
 
 # if (-e $RESULTS) rm $RESULTS
 # touch $RESULTS
 
 #Number of Simulations.
-numsims=1000
+numsims=10000
 
 
 for ((i=1;i<=$numsims;i++)); do
@@ -51,7 +51,7 @@ for ((i=1;i<=$numsims;i++)); do
 	        echo "log none" >> sim.xco
 		echo "addc 3 zgauss" >> sim.xco
 	#	echo "1 0.01 0.5 0.5 8.0 8.0" >> sim.xco
-		echo "6.5 0.01 2.5 2.5 10.0 10.0" >> sim.xco
+		echo "6.0 0.01 2.5 2.5 10.0 10.0" >> sim.xco
 	#	echo "0.01,-1" >> sim.xco
 		echo "0.1,-1" >> sim.xco
 		echo "0.002,-1" >> sim.xco
