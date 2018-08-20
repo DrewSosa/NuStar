@@ -51,7 +51,7 @@ for ((i=1;i<=$numsims;i++)); do
 	        echo "log none" >> sim.xco
 		echo "addc 3 zgauss" >> sim.xco
 	#	echo "1 0.01 0.5 0.5 8.0 8.0" >> sim.xco
-		echo "6.0 0.01 2.5 2.5 10.0 10.0" >> sim.xco
+		echo "3.3 0.01 2.5 2.5 10.0 10.0" >> sim.xco
 	#	echo "0.01,-1" >> sim.xco
 		echo "0.1,-1" >> sim.xco
 		echo "0.002,-1" >> sim.xco

@@ -10,11 +10,11 @@
 
 	#Lists that allow for easy variation of parameters
  	radii=("60")
- 	energies=("6.15")
+ 	energies=("3.5")
  	widths=("0.1")
  	patterns=("0")
  	rates=("2")
- 	ids=("0672130101" "0672130701" "M32_Chandra" "0505760201" "0672130501")
+ 	ids=("0672130101" "0672130701" "M32_Chandra" "0505760201" "0672130501" "0112520701")
 
 
  	
@@ -34,7 +34,7 @@
 						
 						
 
-						# Look for files that correspond to the given parameters ands assign them to a variable.
+						Look for files that correspond to the given parameters ands assign them to a variable.
 						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
 						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
 						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
@@ -87,9 +87,11 @@
 						# Add a Gaussian absorption line (any energy)
 						echo "-1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10" >> contour.txt
 						echo "fit" >> contour.txt
-						echo "step 5 5.0 9.0 20" >> contour.txt
+						
+						echo "step 5 2 9. 30" >> contour.txt
 						# echo "steppar log" >> contour.txt
-						echo "thaw 6" >> contour.txt
+						# echo "thaw 6" >> contour.txt
+						
 						echo "fit" >> contour.txt
 						#fix the plot.
 				
@@ -134,7 +136,7 @@
 						echo "fit" >> flux.txt
 
 					    # Save the best-fit model
-					    # echo "save all fit_flux_tbabscutoffpl.xcm" >> flux.txt
+					    echo "save all fit_flux_tbabscutoffpl.xcm" >> flux.txt
 						echo "setplot energy" >> flux.txt
 						echo "setplot rebin 3 10" >> flux.txt
 

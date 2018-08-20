@@ -4,16 +4,16 @@
 #works in conjunction with log_chi_spec.sh
 #Change into the correct directory.
 cd
-cd Documents/Caltech/0505760201
+cd Documents/Caltech/0206890401
 
 export SAS_DIR=/Users/Anne/Documents/Caltech/SAS/xmmsas_20180620_1732/
-export SAS_ODF=/Users/Anne/Documents/Caltech/0505760201/
+export SAS_ODF=/Users/Anne/Documents/Caltech/0206890401/
 export SAS_CCFPATH=/Users/Anne/Documents/Caltech/CCFs/
 
 #Build the CCF file
 cifbuild
 
-export SAS_CCF=/Users/Anne/Documents/Caltech/0505760201/ccf.cif
+export SAS_CCF=/Users/Anne/Documents/Caltech/0206890401/ccf.cif
 
 #No need for odfingest if the pps files exist already? I don't know. - Andrew.
 # odfingest
@@ -39,7 +39,7 @@ read -p "WARNING! Correct Observation and Detector coordinates (via DS9) must ap
 #List of parameters that we want to vary.
 radii=("40" "50" "60")
 patterns=("0")
-rates=("2")
+rates=("10")
 #For loop for combinations of varied parameters.
 for pattern in ${patterns[@]}; do
 	if [ $pattern="0" ]
@@ -70,10 +70,10 @@ for pattern in ${patterns[@]}; do
 			
 
 			#spectrum
-			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(34611,20970,'"${detector_radius}"'))' filteredset=pn_src_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_ltcrv_en0.2-10_${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(28369,23708,'"${detector_radius}"'))' filteredset=pn_src_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_ltcrv_en0.2-10_${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
 			#background
-			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(32199,21098,1315))' filteredset=pn_bgd2_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_bgd2_ltcrv_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_bgd2_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(26002,21973,1565))' filteredset=pn_bgd2_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_bgd2_ltcrv_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_bgd2_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
 			#backscale
 			backscale spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits'

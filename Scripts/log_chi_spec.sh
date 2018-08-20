@@ -10,8 +10,8 @@
 	rm delc_document.txt
 
 	#Lists that allow for easy variation of parameters
- 	radii=("60")
- 	energies=("5.75" "6" "6.2" "6.5")
+ 	radii=("40" "50" "60")
+ 	energies=("5")
  	widths=("0.1")
  	patterns=("0")
  	rates=("2")
@@ -42,11 +42,11 @@
 						rm zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 
-						# Look for files that correspond to the given parameters ands assign them to a variable.
-						# datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
-						# respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
-						# arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
-						# bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
+						#Look for files that correspond to the given parameters ands assign them to a variable.
+						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
+						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
+						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
+						bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
 					
 						# datafile="ULX1_grp.pi"
 						# respdata="ULX1.rmf"
@@ -138,7 +138,7 @@
 						
 						echo "$delc ${pattern} ${radius} ${LineE} ${width} ${rate}	" >> delc_document.txt
 						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
-						
+						rm zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 
 
 					done
