@@ -121,7 +121,7 @@ nodes.append([energy, delta_chi, "0672130101"])
 axarray[0].set_xscale("log")
 XMMCon, = axarray[0].plot(nodes[0][0], nodes[0][1], color="b")
 XMMCon.set_label("XMM")
-axarray[0].legend(loc=6, prop={'size': 17})
+axarray[0].legend(loc=6, prop={'size': 25})
 
 
 nodes = []
@@ -144,7 +144,7 @@ XMMmodel, = axarray[1].plot(nodes[0][0], nodes[0][4], color='k')
 XMMmodel.set_label("XMM Model")
 XMMdata = axarray[1].errorbar(nodes[0][0], nodes[0][1], nodes[0][3], nodes[0][2], ecolor="b", elinewidth=.5, c='b', alpha=0.7)
 XMMdata.set_label("XMM Spectrum")
-axarray[1].legend(loc=8, prop={'size': 15})
+axarray[1].legend(loc=3, prop={'size': 24})
 
 #Label axes
 
