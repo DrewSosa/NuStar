@@ -65,8 +65,8 @@ os.chdir(home+"/"+"M32_Chandra"+"/"+"ULX")
 fig, axarray = plt.subplots(2, 1, figsize=(9, 13), sharex=True)
 
 axarray[1].set_xlabel(r'\textbf{Energy} (keV)', size=25)
-axarray[1].set_ylabel(r'textbf Flux $\phi\ $ ', size=25)
-axarray[0].set_ylabel(r'\ Chi-Squared $\Delta\ $$\chi\ $ ' , size=25)
+axarray[1].set_ylabel(r' $\phi\ $ ', size=25)
+axarray[0].set_ylabel(r'\ $\Delta\ $$\chi\ $$^2$ ' , size=25)
 
 
 
