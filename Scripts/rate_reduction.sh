@@ -4,16 +4,16 @@
 #works in conjunction with log_chi_spec.sh
 #Change into the correct directory.
 cd
-cd Documents/Caltech/0206890401
+cd Documents/Caltech/0200470101
 
 export SAS_DIR=/Users/Anne/Documents/Caltech/SAS/xmmsas_20180620_1732/
-export SAS_ODF=/Users/Anne/Documents/Caltech/0206890401/
+export SAS_ODF=/Users/Anne/Documents/Caltech/0200470101/
 export SAS_CCFPATH=/Users/Anne/Documents/Caltech/CCFs/
 
 #Build the CCF file
 cifbuild
 
-export SAS_CCF=/Users/Anne/Documents/Caltech/0206890401/ccf.cif
+export SAS_CCF=/Users/Anne/Documents/Caltech/0200470101/ccf.cif
 
 #No need for odfingest if the pps files exist already? I don't know. - Andrew.
 # odfingest
@@ -37,9 +37,9 @@ read -p "WARNING! Correct Observation and Detector coordinates (via DS9) must ap
 
 
 #List of parameters that we want to vary.
-radii=("40" "50" "60")
+radii=("60")
 patterns=("0")
-rates=("10")
+rates=("0.5")
 #For loop for combinations of varied parameters.
 for pattern in ${patterns[@]}; do
 	if [ $pattern="0" ]

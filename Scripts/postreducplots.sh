@@ -10,11 +10,11 @@
 
 	#Lists that allow for easy variation of parameters
  	radii=("60")
- 	energies=("3.5")
+ 	energies=("6")
  	widths=("0.1")
  	patterns=("0")
- 	rates=("2")
- 	ids=("0672130101" "0672130701" "M32_Chandra" "0505760201" "0672130501" "0112520701")
+ 	rates=("1.2")
+ 	ids=("0672130101" "0672130701" "M32_Chandra" "0672130501" "0112520701")
 
 
  	
@@ -32,9 +32,7 @@
 
 						#Clean documentation files.
 						
-						
-
-						Look for files that correspond to the given parameters ands assign them to a variable.
+						# Look for files that correspond to the given parameters ands assign them to a variable.
 						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
 						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
 						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"

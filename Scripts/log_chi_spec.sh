@@ -10,11 +10,11 @@
 	rm delc_document.txt
 
 	#Lists that allow for easy variation of parameters
- 	radii=("40" "50" "60")
- 	energies=("5")
+ 	radii=("60")
+ 	energies=("5" "6" "3.3")
  	widths=("0.1")
  	patterns=("0")
- 	rates=("2")
+ 	rates=("0.4")
 
 	#Title
 
@@ -54,10 +54,10 @@
 						# bgfile="ULX1_bkg.pi"
 
 						#MOS DATA 
-						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
-						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
-						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
-						bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
+						# datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
+						# respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
+						# arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
+						# bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
 					
 					
 
@@ -137,8 +137,8 @@
 						delc=$(bc <<< "${tbabs_chi}-${zgauss_chi}")
 						
 						echo "$delc ${pattern} ${radius} ${LineE} ${width} ${rate}	" >> delc_document.txt
-						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
-						rm zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
+						# rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
+						# rm zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 
 
 					done
