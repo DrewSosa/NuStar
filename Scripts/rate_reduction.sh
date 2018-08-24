@@ -39,7 +39,7 @@ read -p "WARNING! Correct Observation and Detector coordinates (via DS9) must ap
 #List of parameters that we want to vary.
 radii=("60")
 patterns=("0")
-rates=("0.5")
+rate
 #For loop for combinations of varied parameters.
 for pattern in ${patterns[@]}; do
 	if [ $pattern="0" ]
