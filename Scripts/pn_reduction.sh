@@ -1,6 +1,8 @@
 #!/bin/bash
 
-cd 
+#Andrew Sosanya, @andrew.sosanya.20@dartmouth.edu , NuStar WAVE Research Fellow
+
+cd
 cd Documents/Caltech/0112520701
 
 export SAS_DIR=/Users/Anne/Documents/Caltech/SAS/xmmsas_20180620_1732/
@@ -11,11 +13,11 @@ cifbuild
 
 export SAS_CCF=/Users/Anne/Documents/Caltech/0112520701/ccf.cif
 
-# odfingest
+#only do if you don't have PPS files.
+    # odfingest
+    # export SAS_ODF=/Users/Anne/Documents/Caltech/xmmdata/0672130701/odf/3391_0830191301_SCX00000SUM.SAS
 
-# export SAS_ODF=/Users/Anne/Documents/Caltech/xmmdata/0672130701/odf/3391_0830191301_SCX00000SUM.SAS
-
-
+#Change directory
 mkdir ULX
 cd ULX
 
@@ -50,8 +52,8 @@ rmfgen rmfset=pn_pat0-4_src_30.rmf spectrumset='pn_pat0-4_src_30_pi.fits'
 #arf
 arfgen arfset=pn_pat0-4_src_30.arf spectrumset='pn_pat0-4_src_30_pi.fits' withrmfset=yes rmfset=pn_pat0-4_src_30.rmf
 
-#group the spectrum 
+#group the spectrum
 grppha pn_pat0-4_src_30_pi.fits pn_pat0-4_src_30_pi_20.fits "group min 20" exit
 grppha pn_pat0-4_src_30_pi.fits pn_pat0-4_src_30_pi_1.fits "group min 1" exit
 
-#awk command --> log show all, get the chi-squared statisti, do int () type ... vary the pattern, and radius and rate, just test 0.1 width. 
+#awk command --> log show all, get the chi-squared statisti, do int () type ... vary the pattern, and radius and rate, just test 0.1 width.

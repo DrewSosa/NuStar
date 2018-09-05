@@ -16,9 +16,9 @@ cifbuild
 export SAS_CCF=/Users/Anne/Documents/Caltech/0200470101/ccf.cif
 
 #No need for odfingest if the pps files exist already? I don't know. - Andrew.
-# odfingest
+	# odfingest
 
-# export SAS_ODF=/Users/Anne/Documents/Caltech/xmmdata/0672130701/odf/3391_0830191301_SCX00000SUM.SAS
+	# export SAS_ODF=/Users/Anne/Documents/Caltech/xmmdata/0672130701/odf/3391_0830191301_SCX00000SUM.SAS
 
 #Make the ULX folder. Up to the user to decide where the working directory is.
 # mkdir ULX
@@ -39,7 +39,8 @@ read -p "WARNING! Correct Observation and Detector coordinates (via DS9) must ap
 #List of parameters that we want to vary.
 radii=("60")
 patterns=("0")
-rate
+rates=("1.2")
+
 #For loop for combinations of varied parameters.
 for pattern in ${patterns[@]}; do
 	if [ $pattern="0" ]
@@ -49,8 +50,8 @@ for pattern in ${patterns[@]}; do
 	if [ $pattern="0-4" ]
 	then
 		patnumber="4"
-		
-		
+
+
 	fi
 	for radius in ${radii[@]}; do
 		for rate in ${rates[@]}; do
@@ -67,7 +68,7 @@ for pattern in ${patterns[@]}; do
 			# where apparently the lack of the final forward slash and replacement string are interpreted as delete.
 			tabgtigen table=pn_ltcrv_en10-12_pat${pattern}_${radius}_${rate//.}.fits expression='RATE<='"${rate}"'' gtiset=lowbg_gti.fits
 
-			
+
 
 			#spectrum
 			evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<='"${patnumber}"')&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE(28369,23708,'"${detector_radius}"'))' filteredset=pn_src_en0.2-10_pat${pattern}_${radius}_${rate//.}.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_src_ltcrv_en0.2-10_${pattern}_${radius}_${rate//.}.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_src_pat'"${pattern}"'_'"${radius}"'_'"${rate//.}"'_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
@@ -89,7 +90,7 @@ for pattern in ${patterns[@]}; do
 			if [ ! -f pn_src_pat${pattern}_${radius}_${rate//.}_pi_20.fits ] || [! -f pn_src_pat${pattern}_${radius}_${rate//.}_pi_1.fits] ; then
 				grppha pn_src_pat${pattern}_${radius}_${rate//.}_pi.fits pn_src_pat${pattern}_${radius}_${rate//.}_pi_20.fits "group min 20" exit
 				grppha pn_src_pat${pattern}_${radius}_${rate//.}_pi.fits pn_src_pat${pattern}_${radius}_${rate//.}_pi_1.fits "group min 1" exit
-    			
+
 			fi
 
 		done

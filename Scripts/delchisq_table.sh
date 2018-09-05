@@ -31,14 +31,14 @@
 
 
 					#To avoid periods in the files.
-					
+
 
 						#Clean documentation files.
-						
+
 						rm ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						rm ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 						rm fit_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xcm
-						
+
 						rm zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 						rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 
@@ -47,19 +47,19 @@
 						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
 						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
 						bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
-					
+
 						# datafile="ULX1_grp.pi"
 						# respdata="ULX1.rmf"
 						# arf="ULX1.corr.arf"
 						# bgfile="ULX1_bkg.pi"
 
-						#MOS DATA 
+						#MOS DATA
 						# datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
 						# respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
 						# arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
 						# bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
-					
-					
+
+
 
 						echo "query yes" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 
@@ -109,7 +109,7 @@
 						echo "thaw 6" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "fit" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						#fix the plot.
-						
+
 						echo "setplot energy" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "setplot rebin 3 10" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
 						echo "plot ld delc" >> ${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.xco
@@ -135,16 +135,16 @@
 						zgauss_chi=$(awk  '/Fit statistic : Chi-Squared =/ {print $6}' $zgauss_file)
 						LineE=$(awk  '/LineE      keV / {print $7}' $zgauss_file)
 						delc=$(bc <<< "${tbabs_chi}-${zgauss_chi}")
-						
+
 						echo "$delc ${pattern} ${radius} ${LineE} ${width} ${rate}	" >> delc_document.txt
 						# rm tbabs_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 						# rm zgauss_${pattern}_${radius}_${energy//.}-${width//.}_${rate//.}.log
 
 
 					done
-					
+
 				done
-				
+
 			done
 		done
 	done

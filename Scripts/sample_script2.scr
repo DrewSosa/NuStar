@@ -1,6 +1,0 @@
-
-#! /bin/tcsh -f
-
-set project = "/Users/murray/work/M51"
-
-set dir =  /Users/sosa/Documents/Caltech/Spectra

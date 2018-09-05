@@ -6,7 +6,7 @@
 	cd
 	cd Documents/Caltech/${obs_id}/ULX
 
-	
+
 
 	#Lists that allow for easy variation of parameters
  	radii=("60")
@@ -17,7 +17,7 @@
  	ids=("0672130101" "0672130701" "M32_Chandra" "0672130501" "0112520701")
 
 
- 	
+
 
 	#Iterate through different combinations of parameters.
 	for pattern in ${patterns[@]}; do
@@ -28,16 +28,16 @@
 
 
 					#To avoid periods in the files.
-					
+
 
 						#Clean documentation files.
-						
+
 						# Look for files that correspond to the given parameters ands assign them to a variable.
 						datafile="$(ls | grep "pat${pattern}_" | grep "$radius" | grep "${rate//.}_"| grep "20.fits")"
 						respdata="$(ls | grep "pat${pattern}_${radius}_${rate//.}.rmf")"
 						arf="$(ls | grep "pat${pattern}_${radius}_${rate//.}.arf")"
 						bgfile="$(ls | grep "bgd2_pat${pattern}_${radius}_${rate//.}_pi.fits")"
-					
+
 						# datafile="ULX1_grp.pi"
 						# respdata="ULX1.rmf"
 						# arf="ULX1.corr.arf"
@@ -85,16 +85,16 @@
 						# Add a Gaussian absorption line (any energy)
 						echo "-1e-6 1e-7 -1e10 -1e10 -1e-10 -1e-10" >> contour.txt
 						echo "fit" >> contour.txt
-						
+
 						echo "step 5 2 9. 30" >> contour.txt
 						# echo "steppar log" >> contour.txt
 						# echo "thaw 6" >> contour.txt
-						
+
 						echo "fit" >> contour.txt
 						#fix the plot.
-				
+
 						echo "plot contour" >> contour.txt
-					
+
 						echo "setplot command wdata wdata.dat" >> contour.txt
 					    echo "plot contour" >> contour.txt
 						echo "mv wdata.dat fit_contour_tbabscutoffpl+zgauss.dat" >> contour.txt
@@ -105,7 +105,7 @@
 
 						#launch XSPEC
 						xspec - contour.txt
-												
+
 						#FLUX
 
 						echo "query yes" > flux.txt
@@ -150,7 +150,7 @@
 
 						xspec - flux.txt
 
-						#DELTA CHI 
+						#DELTA CHI
 						echo "query yes" > delta_chi.txt
 						echo "statistic chi" >> delta_chi.txt
 						echo "cpd /null" >> delta_chi.txt
@@ -192,10 +192,9 @@
 						xspec - delta_chi.txt
 
 					done
-					
+
 				done
-				
+
 			done
 		done
 	done
-#thaw 6" / "error 6" "rerun0 40 5.75 0.1, get plot"
