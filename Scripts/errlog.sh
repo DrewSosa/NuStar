@@ -1,10 +1,11 @@
 	#!/bin/bash
-
+	#Author @Andrew Sosanya, NASA NuStar Team @Caltech -- andrew.sosanya.20@dartmouth.edu
+	#Script to conduct XSPEC error statistics.
 
 	echo "cd" > errorlog.xco
 	echo "cd Documents/Caltech/0672130101/ULX" >> errorlog.xco
-	
-	
+
+
 	echo "query yes" >> errorlog.xco
 	echo "statistic chi" >> errorlog.xco
 	echo "cpd /null" >> errorlog.xco
@@ -19,7 +20,7 @@
 	echo "fit" >> errorlog.xco
 	echo "show all" >> errorlog.xco
 	echo "log none" >> errorlog.xco
-	
+
 	echo "exit" >> errorlog.xco
 
 	#launch XSPEC

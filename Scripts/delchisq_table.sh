@@ -1,5 +1,7 @@
 	#!/bin/bash
 	#specific
+    #Andrew Sosanya 2018 SURF/WAVE Student andrew.sosanya.20@dartmouth.edu
+
 	read -p "Observation ID: " obs_id
 
 	#Change into the correct directory.
