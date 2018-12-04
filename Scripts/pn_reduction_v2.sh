@@ -8,7 +8,10 @@ for folder in *; do
     cd /Users/Anne/Documents/Caltech/ReducedDec/$folder/
     for id in *; do 
         echo $folder, $id
-
+        read -p "Have analyzed yet? yes/no?" answer
+        if [ "$answer" = "yes" ]; then
+        continue
+        fi 
         cd
         cd Documents/Caltech/ReducedDec/${folder}/${id}
 
@@ -45,13 +48,13 @@ for folder in *; do
         echo $folder
         echo $id
         read -p "Detector X Coordinate?" detx
-        if [$detx -eq break]; then
+        if [ "$detx" = "break" ]; then
         continue
         fi 
 
         read -p "Detector Y Coordinate?" dety
         # read -p "Detector Radius?" detrad
-        read -p "Background X Coordinate?" bgdy
+        read -p "Background X Coordinate?" bgdx
         read -p "Background Y Coordinate?" bgdy
         read -p "Background Radius?" bgdrad
 
@@ -68,10 +71,10 @@ for folder in *; do
 
 
         #spectrum
-        evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<=4)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE($detx,$dety,600))' filteredset=pn_pat0-4_en0.2-10_src_30.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0-4_en0.2-10_src_30_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0-4_src_30_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+        evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<=4)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE('"${detx}"','"${dety}"',600))' filteredset=pn_pat0-4_en0.2-10_src_30.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0-4_en0.2-10_src_30_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0-4_src_30_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
         #background
-        evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<=4)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE($bgdx,$bgdy,bgdrad))' filteredset=pn_pat0-4_en0.2-10_bgd2.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0-4_en0.2-10_bgd2_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0-4_bgd2_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
+        evselect table='pn.fits' withfilteredset=yes expression='(PATTERN<=4)&&(PI in [200:10000])&&#XMMEA_EP&&gti(lowbg_gti.fits,TIME)&&((X,Y) in CIRCLE('"${bgdx}"','"${bgdy}"','"${bgdrad}"'))' filteredset=pn_pat0-4_en0.2-10_bgd2.fits filtertype=expression keepfilteroutput=yes updateexposure=yes filterexposure=yes withrateset=yes rateset=pn_pat0-4_en0.2-10_bgd2_ltcrv.fits maketimecolumn=yes timecolumn=TIME timebinsize=0.074 makeratecolumn=yes energycolumn='PI' withspectrumset=yes spectrumset='pn_pat0-4_bgd2_pi.fits' spectralbinsize=5 withspecranges=yes specchannelmin=0 specchannelmax=20479
 
         #backscale
         backscale spectrumset='pn_pat0-4_src_30_pi.fits'

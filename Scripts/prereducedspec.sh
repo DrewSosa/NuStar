@@ -15,7 +15,6 @@ echo "number of obs IDs:" $numobsids
 cd $project/Spectra
 for filename in *; do
     echo filename
-    #echo $(ls) #====ATTN #why does it skip over the pps directory?
     cd $project/Spectra/$filename/pps
 
     # echo TEST
