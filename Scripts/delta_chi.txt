@@ -1,0 +1,27 @@
+query yes
+statistic chi
+cpd /null
+data none
+model none
+log delta_chi.log
+data 
+back 
+resp 
+arf 
+ignore **-2.0 10.0-**
+ignore bad
+model tbabs*cutoffpl
+1.0,0.1
+2, 0.01
+15, 0.01
+1.E-4 1E-5
+fit
+save all fit_tbabscutoffpl.xcm
+setplot energy
+setplot rebin 3 10
+plot delchi
+setplot command wdata wdata.dat
+plot delchi
+mv wdata.dat fit_tbabscutoffpl_delc.dat
+log none
+exit

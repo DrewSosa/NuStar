@@ -1,0 +1,30 @@
+#XSPEC version: 12.9.1p
+#Build Date/Time: Tue Mar  6 14:39:23 2018
+#
+!XSPEC12>data 
+#input data files
+#    Syntax: data <none> | [n:m] <filename{range}> 
+#    (many options: see help for full syntax)
+#
+!XSPEC12>back 
+#
+!XSPEC12>backgrnd
+#reset background files
+#    Syntax: backgrnd none
+#            backgrnd [spectrum number] <filename{range}>
+#    (many options: see help for full syntax)
+#
+!XSPEC12>resp 
+#
+!XSPEC12>response
+#
+!XSPEC12>arf 
+#reset auxiliary response file
+#    Syntax: arf none
+#            arf [source number:spectrum number] <filename{range}>
+#    (many options: see help for full syntax)
+#
+!XSPEC12>ignore **-2.0 10.0-**
+#
+#***XSPEC Error:  no data loaded 
+#
